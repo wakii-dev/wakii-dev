@@ -37,17 +37,19 @@ jobs:
           FOLLOWERS=$(echo "$USER_JSON" | jq -r '.followers')
           REPOS=$(echo "$USER_JSON" | jq -r '.public_repos')
 
-          STARS=$(gh api "users/$USER/repos?per_page=100" --paginate \
+          STARS=$(gh api "users/$USER/repos?per_page=100" \
             --jq '[.[].stargazers_count] | add // 0')
 
           CONTRIBS=$(gh api graphql \
             -f query='query($u:String!){ user(login:$u){ contributionsCollection { contributionCalendar { totalContributions } } } }' \
             -f u="$USER" --jq '.data.user.contributionsCollection.contributionCalendar.totalContributions')
 
-          # aggregate languages across all public repos
-          LANG_JSON=$(gh api "users/$USER/repos?per_page=100" --paginate --jq '.[].full_name' | while read -r repo; do
-            gh api "repos/$USER/$repo/languages"
-          done | jq -s '[.[] | to_entries[]] | group_by(.key) |
+          # aggregate languages across all public repos (no --paginate: page
+          # URL lines leak into output and poison the repo list)
+          LANG_JSON=$(gh api "users/$USER/repos?per_page=100" --jq '.[].full_name' | while read -r repo; do
+            [ -z "$repo" ] && continue
+            gh api "repos/$USER/$repo/languages" || echo '{}'
+          done | jq -s 'map(to_entries) | flatten | group_by(.key) |
             map({lang: .[0].key, bytes: (map(.value) | add)}) |
             sort_by(-.bytes) | .[0:5]')
 

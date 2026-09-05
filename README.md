@@ -15,6 +15,12 @@
 | <img src="assets/terminal.svg" width="560" alt="wakii up terminal" /> | **Human × AI agents** — specs and judgment from me, execution at agent speed (Claude, Kiro).<br /><br />Every project here — including the 2.5M-order logistics platform — was built in this loop: **spec → plan → parallel agents → review → ship.** |
 | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
+## 🤖 The agent crew (my contributors)
+
+<div align="center">
+  <img src="assets/crew.svg" width="100%" alt="agent crew: HoiVu, Claude, Kiro" />
+</div>
+
 ## 🚀 What I'm building
 
 ### ⚡ [Wakii](https://wakii.dev) — agentic IDE
