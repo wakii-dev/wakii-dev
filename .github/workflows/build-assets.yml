@@ -1,0 +1,118 @@
+name: Build profile assets
+
+on:
+  schedule:
+    - cron: "23 3 * * *" # daily ~03:23 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # ---- 3D contribution graph ----
+      - uses: yoshi389111/github-profile-3d-contrib@0.7.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: wakii-dev
+      - uses: yoshi389111/github-profile-3d-contrib@0.7.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: wakii-dev
+
+      # ---- Mission-control stats panel (self-rendered, no third-party service) ----
+      - name: Render stats panel
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USER: wakii-dev
+        run: |
+          set -euo pipefail
+          USER_JSON=$(gh api "users/$USER")
+          FOLLOWERS=$(echo "$USER_JSON" | jq -r '.followers')
+          REPOS=$(echo "$USER_JSON" | jq -r '.public_repos')
+
+          STARS=$(gh api "users/$USER/repos?per_page=100" --paginate \
+            --jq '[.[].stargazers_count] | add // 0')
+
+          CONTRIBS=$(gh api graphql \
+            -f query='query($u:String!){ user(login:$u){ contributionsCollection { contributionCalendar { totalContributions } } } }' \
+            -f u="$USER" --jq '.data.user.contributionsCollection.contributionCalendar.totalContributions')
+
+          # aggregate languages across all public repos
+          LANG_JSON=$(gh api "users/$USER/repos?per_page=100" --paginate --jq '.[].full_name' | while read -r repo; do
+            gh api "repos/$USER/$repo/languages"
+          done | jq -s '[.[] | to_entries[]] | group_by(.key) |
+            map({lang: .[0].key, bytes: (map(.value) | add)}) |
+            sort_by(-.bytes) | .[0:5]')
+
+          mkdir -p assets
+          {
+            cat <<'HEAD'
+            <svg width="840" height="250" viewBox="0 0 840 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="mission control">
+              <defs>
+                <linearGradient id="mbg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#140b26"/>
+                </linearGradient>
+                <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#6D28D9"/><stop offset="1" stop-color="#f0abfc"/>
+                </linearGradient>
+                <filter id="mglow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="3" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <rect x="2" y="2" width="836" height="246" rx="14" fill="url(#mbg)" stroke="#7c6cf055" stroke-width="1.5"/>
+              <text x="26" y="40" font-family="Menlo, monospace" font-size="15" font-weight="700" fill="#f0abfc" filter="url(#mglow)">▸ MISSION CONTROL</text>
+              <text x="814" y="40" text-anchor="end" font-family="Menlo, monospace" font-size="12" fill="#475569">live · auto-updated</text>
+            HEAD
+            X=26
+            for pair in "Followers|$FOLLOWERS" "Stars|$STARS" "Repos|$REPOS" "Contribs (1y)|$CONTRIBS"; do
+              LABEL="${pair%%|*}"; VALUE="${pair##*|}"
+              case $LABEL in
+                "Followers") IX=0;; "Stars") IX=1;; "Repos") IX=2;; *) IX=3;;
+              esac
+              YX=$((30 + 0))
+              cat <<TILE
+              <g>
+                <rect x="$X" y="62" width="190" height="76" rx="10" fill="#111834" stroke="#7c6cf033"/>
+                <text x="$((X + 95))" y="94" text-anchor="middle" font-family="Menlo, monospace" font-size="12" fill="#64748b">$LABEL</text>
+                <text x="$((X + 95))" y="122" text-anchor="middle" font-family="Menlo, monospace" font-size="22" font-weight="700" fill="#e2e8f0">$VALUE</text>
+              </g>
+            TILE
+              X=$((X + 200))
+            done
+            echo '  <text x="26" y="172" font-family="Menlo, monospace" font-size="13" font-weight="700" fill="#67e8f9">▸ LANGUAGES (by bytes, public repos)</text>'
+            TOTAL=$(echo "$LANG_JSON" | jq '[.[].bytes] | add // 1')
+            Y=196
+            echo "$LANG_JSON" | jq -c '.[]' | while read -r row; do
+              LANG=$(echo "$row" | jq -r '.lang')
+              BYTES=$(echo "$row" | jq -r '.bytes')
+              PCT=$(python3 -c "print(round($BYTES / ${TOTAL:-1} * 100, 1))")
+              WIDTH=$(python3 -c "print(int($BYTES / ${TOTAL:-1} * 300))")
+              echo "  <text x='26' y='$((Y + 4))' font-family='Menlo, monospace' font-size='12' fill='#94a3b8' width='90'>$LANG</text>"
+              echo "  <rect x='130' y='$((Y - 7))' width='300' height='10' rx='5' fill='#1e293b'/>"
+              echo "  <rect x='130' y='$((Y - 7))' width='${WIDTH:-2}' height='10' rx='5' fill='url(#bar)'/>"
+              echo "  <text x='440' y='$((Y + 4))' font-family='Menlo, monospace' font-size='12' fill='#64748b'>${PCT}%</text>"
+              Y=$((Y + 26))
+            done
+            echo '</svg>'
+          } > assets/mission-control.svg
+
+      # ---- commit generated assets ----
+      - name: Commit generated assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile-3d-contrib assets/mission-control.svg || true
+          if git diff --cached --quiet; then
+            echo "nothing to update"
+          else
+            git commit -m "assets: refresh generated profile assets [skip ci]"
+            git push
+          fi

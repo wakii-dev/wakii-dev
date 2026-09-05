@@ -1,22 +1,19 @@
-<h1 align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:6D28D9,50:C026D3,100:DB2777&height=180&section=header&text=HoiVu&fontSize=52&fontColor=ffffff&animation=fadeIn&desc=Building%20Wakii%20%E2%9A%A1&descSize=22&descAlignY=68" width="100%" />
-</h1>
+<div align="center">
+  <img src="assets/hero.svg" width="100%" alt="Wakii × HoiVu" />
 
-<p align="center">
   <a href="https://wakii.dev">
     <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=C026D3&center=true&vCenter=true&random=false&width=520&lines=Building+Wakii+%E2%9A%A1+agentic+IDE;A+team+of+agents%2C+built+in.;Human+%C3%97+AI+agents%2C+one+flow." alt="Typing SVG" />
   </a>
-</p>
 
-<p align="center">
   🌐 <a href="https://wakii.dev"><b>wakii.dev</b></a> · <a href="https://github.com/wakii-dev/wakii-site">wakii-site</a> · <a href="https://github.com/wakii-dev/hub-store">hub-store</a>
-</p>
+</div>
 
 ---
 
-I work **human × AI agents** style — every project below is built in close
-collaboration with coding agents (Claude, Kiro): specs and judgment from me,
-execution at agent speed.
+## 🖥️ How I ship
+
+| <img src="assets/terminal.svg" width="560" alt="wakii up terminal" /> | **Human × AI agents** — specs and judgment from me, execution at agent speed (Claude, Kiro).<br /><br />Every project here — including the 2.5M-order logistics platform — was built in this loop: **spec → plan → parallel agents → review → ship.** |
+| -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## 🚀 What I'm building
 
@@ -56,17 +53,19 @@ execution at agent speed.
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
 
-## 📊 GitHub stats
+## 📊 Mission control
 
-<p align="center">
-  <img src="https://github-readme-stats-sigma-five.vercel.app/api?username=wakii-dev&show_icons=true&hide_border=true&count_private=true&theme=tokyonight" height="150" alt="GitHub stats" />
-  <img src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=wakii-dev&layout=compact&hide_border=true&langs_count=8&theme=tokyonight" height="150" alt="Top languages" />
-</p>
-<p align="center">
-  <img src="https://streak-stats.demolab.com?user=wakii-dev&hide_border=true&locale=en&theme=tokyonight" height="150" alt="GitHub streak" />
-</p>
+<div align="center">
+  <img src="assets/mission-control.svg" width="100%" alt="mission control stats" />
+</div>
 
-## 🐍 Contribution snake
+## 🧊 Contributions in 3D
+
+<div align="center">
+  <img src="profile-3d-contrib/profile-night-rainbow.svg" width="100%" alt="3D contribution graph" />
+</div>
+
+## 🐍 Snake
 
 <p align="center">
   <picture>
@@ -78,8 +77,8 @@ execution at agent speed.
 
 ---
 
-<p align="center">
+<div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:DB2777,50:C026D3,100:6D28D9&height=110&section=footer&animation=fadeIn" width="100%" />
-</p>
+</div>
 
-*Building in public, one agent-crew sprint at a time.* 🤖
+<div align="center"><i>Building in public, one agent-crew sprint at a time. 🤖</i></div>
