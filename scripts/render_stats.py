@@ -121,8 +121,11 @@ parts = [
 
 x = 26
 for label, value in tiles:
+    delay = round(0.1 + len(parts) * 0.001, 3)
     parts.append(
-        f'<g><rect x="{x}" y="62" width="190" height="76" rx="10" fill="#111834" '
+        f'<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.5s" '
+        f'begin="{delay}s" fill="freeze"/>'
+        f'<rect x="{x}" y="62" width="190" height="76" rx="10" fill="#111834" '
         f'stroke="#7c6cf033"/>'
         f'<text x="{x + 95}" y="94" text-anchor="middle" font-family="Menlo, monospace" '
         f'font-size="12" fill="#64748b">{label}</text>'
@@ -137,6 +140,7 @@ parts.append(
 )
 
 y = 210
+bar_i = 0
 for lang, b in top:
     pct = round(b / total_bytes * 100, 1)
     width = max(2, int(b / total_bytes * 300))
@@ -145,11 +149,14 @@ for lang, b in top:
         f'<text x="26" y="{y + 4}" font-family="Menlo, monospace" font-size="12" '
         f'fill="#94a3b8">{lang}</text>'
         f'<rect x="130" y="{y - 7}" width="300" height="10" rx="5" fill="#1e293b"/>'
-        f'<rect x="130" y="{y - 7}" width="{width}" height="10" rx="5" fill="{color}"/>'
+        f'<rect x="130" y="{y - 7}" width="0" height="10" rx="5" fill="{color}">'
+        f'<animate attributeName="width" from="0" to="{width}" dur="0.7s" '
+        f'begin="{round(0.2 + bar_i * 0.15, 2)}s" fill="freeze"/></rect>'
         f'<text x="440" y="{y + 4}" font-family="Menlo, monospace" font-size="12" '
         f'fill="#64748b">{pct}%</text>'
     )
     y += 28
+    bar_i += 1
 
 parts.append("</svg>")
 
