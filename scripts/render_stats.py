@@ -51,6 +51,24 @@ while True:
 stars = sum(r["stargazers_count"] for r in repos)
 public_repos = user["public_repos"]
 
+# all-time commit count across public repos (paginated)
+total_commits = 0
+for r in repos:
+    page = 1
+    while True:
+        req = urllib.request.Request(
+            f"https://api.github.com/repos/{USER}/{r['name']}/commits?per_page=100&page={page}",
+            headers=HDR,
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            batch = json.load(resp)
+        if not batch:
+            break
+        total_commits += len(batch)
+        if len(batch) < 100:
+            break
+        page += 1
+
 data = gql(
     "query($u:String!){ user(login:$u){ contributionsCollection "
     "{ contributionCalendar { totalContributions } } } }",
@@ -74,14 +92,14 @@ COLORS = {
 }
 
 tiles = [
-    ("Followers", followers),
+    ("Total commits", total_commits),
     ("Stars", stars),
     ("Repos", public_repos),
     ("Contribs (1y)", contribs),
 ]
 
 parts = [
-    '<svg width="840" height="250" viewBox="0 0 840 250" '
+    '<svg width="840" height="340" viewBox="0 0 840 340" '
     'xmlns="http://www.w3.org/2000/svg" role="img" aria-label="mission control">',
     '<defs><linearGradient id="mbg" x1="0" y1="0" x2="1" y2="1">'
     '<stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#140b26"/>'
@@ -93,7 +111,7 @@ parts = [
     '<feGaussianBlur stdDeviation="3" result="b"/>'
     '<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>'
     "</filter></defs>",
-    '<rect x="2" y="2" width="836" height="246" rx="14" fill="url(#mbg)" '
+    '<rect x="2" y="2" width="836" height="336" rx="14" fill="url(#mbg)" '
     'stroke="#7c6cf055" stroke-width="1.5"/>',
     '<text x="26" y="40" font-family="Menlo, monospace" font-size="15" '
     'font-weight="700" fill="#f0abfc" filter="url(#mglow)">&#9656; MISSION CONTROL</text>',
@@ -114,11 +132,11 @@ for label, value in tiles:
     x += 200
 
 parts.append(
-    '<text x="26" y="172" font-family="Menlo, monospace" font-size="13" '
+    '<text x="26" y="178" font-family="Menlo, monospace" font-size="13" '
     'font-weight="700" fill="#67e8f9">&#9656; LANGUAGES (by bytes, public repos)</text>'
 )
 
-y = 196
+y = 210
 for lang, b in top:
     pct = round(b / total_bytes * 100, 1)
     width = max(2, int(b / total_bytes * 300))
@@ -131,7 +149,7 @@ for lang, b in top:
         f'<text x="440" y="{y + 4}" font-family="Menlo, monospace" font-size="12" '
         f'fill="#64748b">{pct}%</text>'
     )
-    y += 26
+    y += 28
 
 parts.append("</svg>")
 

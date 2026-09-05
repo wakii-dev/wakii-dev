@@ -24,6 +24,12 @@
 *9 agents ship with every Wakii install. The site, the IDE docs and the
 2.5M-order platform below were all reviewed by this crew.*
 
+## ⚙️ The pipeline
+
+<div align="center">
+  <img src="assets/pipeline.svg" width="100%" alt="idea → impact → plan → bracket → parallel SFs → gates → PR" />
+</div>
+
 ## 🚀 What I'm building
 
 ### ⚡ [Wakii](https://wakii.dev) — agentic IDE
