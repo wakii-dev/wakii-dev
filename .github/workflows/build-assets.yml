@@ -22,6 +22,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: wakii-dev
 
+      # ---- dark variant of the animated 3D graph (profile is dark-themed) ----
+      - name: Dark-patch animated 3D
+        run: |
+          sed -e 's/fill="rgb(239, 239, 239)"/fill="rgb(22, 27, 34)"/g' \
+              -e 's/fill="rgb(200, 200, 200)"/fill="rgb(30, 36, 44)"/g' \
+              -e 's/fill="rgb(167, 167, 167)"/fill="rgb(45, 51, 58)"/g' \
+              -e 's/stroke: gray/stroke: #6e7681/g' \
+              -e 's/fill="gray"/fill="#8b949e"/g' \
+              -e 's/<style>\*/<style>text { fill: #e6edf3; }\*/' \
+            profile-3d-contrib/profile-green-animate.svg \
+            > profile-3d-contrib/profile-green-animate-dark.svg
+
       # ---- Mission-control stats panel (self-rendered, no third-party service) ----
       - name: Render stats panel
         env:
