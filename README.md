@@ -18,8 +18,11 @@
 ## 🤖 The agent crew (my contributors)
 
 <div align="center">
-  <img src="assets/crew.svg" width="100%" alt="agent crew: HoiVu, Claude, Kiro" />
+  <img src="assets/agents.svg" width="100%" alt="Wakii agent crew: spec-critic, impact-analyst, plan-critic, task-executor, code-reviewer, verifier, security-audit, rollback-fixer, designer" />
 </div>
+
+*9 agents ship with every Wakii install. The site, the IDE docs and the
+2.5M-order platform below were all reviewed by this crew.*
 
 ## 🚀 What I'm building
 
