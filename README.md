@@ -1,16 +1,22 @@
-# Hi 👋 I'm HoiVu — building **Wakii**
+<h1 align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:6D28D9,50:C026D3,100:DB2777&height=180&section=header&text=HoiVu&fontSize=52&fontColor=ffffff&animation=fadeIn&desc=Building%20Wakii%20%E2%9A%A1&descSize=22&descAlignY=68" width="100%" />
+</h1>
 
-**Wakii** is an agentic IDE with a built-in superpowers team — an AI-native
-development environment where a crew of agents plans, builds, tests and ships
-alongside you.
+<p align="center">
+  <a href="https://wakii.dev">
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=C026D3&center=true&vCenter=true&random=false&width=520&lines=Building+Wakii+%E2%9A%A1+agentic+IDE;A+team+of+agents%2C+built+in.;Human+%C3%97+AI+agents%2C+one+flow." alt="Typing SVG" />
+  </a>
+</p>
 
-🌐 **[wakii.dev](https://wakii.dev)** · [Wakii website repo](https://github.com/wakii-dev/wakii-site)
+<p align="center">
+  🌐 <a href="https://wakii.dev"><b>wakii.dev</b></a> · <a href="https://github.com/wakii-dev/wakii-site">wakii-site</a> · <a href="https://github.com/wakii-dev/hub-store">hub-store</a>
+</p>
+
+---
 
 I work **human × AI agents** style — every project below is built in close
 collaboration with coding agents (Claude, Kiro): specs and judgment from me,
 execution at agent speed.
-
----
 
 ## 🚀 What I'm building
 
@@ -31,8 +37,6 @@ execution at agent speed.
 - PostgreSQL (dual-DB), Kafka side-channel, Keycloak OIDC, pnpm + Turborepo
 - Full QA story: role-matrix regression suites, Playwright e2e, CI on Actions
 
----
-
 ## 🧰 Stack I work with
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
@@ -52,23 +56,30 @@ execution at agent speed.
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
 
----
-
 ## 📊 GitHub stats
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=wakii-dev&show_icons=true&hide_border=true&count_private=true" height="150" alt="GitHub stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=wakii-dev&layout=compact&hide_border=true&langs_count=8" height="150" alt="Top languages" />
+  <img src="https://github-readme-stats-sigma-five.vercel.app/api?username=wakii-dev&show_icons=true&hide_border=true&count_private=true&theme=tokyonight" height="150" alt="GitHub stats" />
+  <img src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=wakii-dev&layout=compact&hide_border=true&langs_count=8&theme=tokyonight" height="150" alt="Top languages" />
 </p>
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=wakii-dev&hide_border=true&locale=en" height="150" alt="GitHub streak" />
+  <img src="https://streak-stats.demolab.com?user=wakii-dev&hide_border=true&locale=en&theme=tokyonight" height="150" alt="GitHub streak" />
+</p>
+
+## 🐍 Contribution snake
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wakii-dev/wakii-dev/output/github-snake-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/wakii-dev/wakii-dev/output/github-snake.svg" />
+    <img alt="contribution snake" src="https://raw.githubusercontent.com/wakii-dev/wakii-dev/output/github-snake.svg" />
+  </picture>
 </p>
 
 ---
 
-## 🤝 Where to find me
-
-- 🌐 Product: **[wakii.dev](https://wakii.dev)**
-- 📦 Code: [wakii-site](https://github.com/wakii-dev/wakii-site) · [hub-store](https://github.com/wakii-dev/hub-store)
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:DB2777,50:C026D3,100:6D28D9&height=110&section=footer&animation=fadeIn" width="100%" />
+</p>
 
 *Building in public, one agent-crew sprint at a time.* 🤖
