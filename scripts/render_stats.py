@@ -122,6 +122,22 @@ parts = [
 x = 26
 for label, value in tiles:
     delay = round(0.1 + len(parts) * 0.001, 3)
+    # count-up animation: N stacked texts, SMIL discrete opacity windows
+    frames = sorted(set([0] + [int(value * i / 7) for i in range(1, 7)] + [int(value)]))
+    n = len(frames)
+    dur = 2.8
+    key_times = " ".join(f"{round(j / n, 3):.3f}" for j in range(n + 1))
+    stack = []
+    for i, v in enumerate(frames):
+        vals = " ".join("1" if j == i else "0" for j in range(n))
+        stack.append(
+            f'<text x="{x + 95}" y="122" text-anchor="middle" '
+            f'font-family="Menlo, monospace" font-size="22" font-weight="700" '
+            f'fill="#e2e8f0" opacity="0">{v}'
+            f'<animate attributeName="opacity" values="{vals}" keyTimes="{key_times}" '
+            f'calcMode="discrete" dur="{dur}s" begin="{delay}s" repeatCount="indefinite"/>'
+            f"</text>"
+        )
     parts.append(
         f'<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.5s" '
         f'begin="{delay}s" fill="freeze"/>'
@@ -129,8 +145,8 @@ for label, value in tiles:
         f'stroke="#7c6cf033"/>'
         f'<text x="{x + 95}" y="94" text-anchor="middle" font-family="Menlo, monospace" '
         f'font-size="12" fill="#64748b">{label}</text>'
-        f'<text x="{x + 95}" y="122" text-anchor="middle" font-family="Menlo, monospace" '
-        f'font-size="22" font-weight="700" fill="#e2e8f0">{value}</text></g>'
+        + "".join(stack)
+        + "</g>"
     )
     x += 200
 
