@@ -28,6 +28,7 @@ jobs:
           sed -e 's/fill="rgb(239, 239, 239)"/fill="rgb(22, 27, 34)"/g' \
               -e 's/fill="rgb(200, 200, 200)"/fill="rgb(30, 36, 44)"/g' \
               -e 's/fill="rgb(167, 167, 167)"/fill="rgb(45, 51, 58)"/g' \
+              -e 's/fill="#ffffff"/fill="#0d1117"/g' \
               -e 's/stroke: gray/stroke: #6e7681/g' \
               -e 's/fill="gray"/fill="#8b949e"/g' \
               -e 's/<style>\*/<style>text { fill: #e6edf3; }\*/' \
