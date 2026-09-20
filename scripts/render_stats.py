@@ -9,6 +9,7 @@ come from contributionsCollection (same source as the profile contribution
 summary), so the panel always matches the real numbers. Reviews are shown
 as the PR count per owner spec (PR reviews are not calendar-countable).
 """
+import datetime as dt
 import json
 import os
 import urllib.request
@@ -56,17 +57,38 @@ stars = sum(r["stargazers_count"] for r in repos)
 public_repos = user["public_repos"]
 
 # per-type contributions for the last year — the exact numbers GitHub's own
-# profile summary shows (commits, PRs, calendar total)
+# profile summary shows (PRs, calendar total)
 data = gql(
     "query($u:String!){ user(login:$u){ contributionsCollection { "
-    "totalCommitContributions totalPullRequestContributions "
+    "totalPullRequestContributions "
     "contributionCalendar { totalContributions } } } }",
     {"u": USER},
 )
 cc = data["user"]["contributionsCollection"]
-commits_1y = cc["totalCommitContributions"]
 prs = cc["totalPullRequestContributions"]
 contribs = cc["contributionCalendar"]["totalContributions"]
+
+# real commit volume: all commits landed on default branches of the public
+# repos in the last 12 months, any author (the work is committed from
+# personal + agent accounts, so GitHub's per-account
+# totalCommitContributions undercounts badly); CI/bot commits excluded
+SINCE = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=365)).strftime(
+    "%Y-%m-%dT%H:%M:%SZ")
+commits_1y = 0
+for r in repos:
+    page = 1
+    while True:
+        batch = api(f"/repos/{USER}/{r['name']}/commits?per_page=100"
+                    f"&since={SINCE}&page={page}")
+        if not batch:
+            break
+        for c in batch:
+            login = ((c.get("author") or {}).get("login")) or ""
+            if not login.endswith("[bot]"):
+                commits_1y += 1
+        if len(batch) < 100:
+            break
+        page += 1
 
 # owner spec: reviews shown as the PR count (GitHub does not expose
 # review contributions through the calendar)
