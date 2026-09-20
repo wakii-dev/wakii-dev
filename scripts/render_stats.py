@@ -123,25 +123,33 @@ TILE_W, GAP, X0 = 124, 8, 26
 x = X0
 for label, value in tiles:
     delay = round(0.1 + len(parts) * 0.001, 3)
-    # count-up animation: N stacked texts, SMIL discrete opacity windows
+    # static-first: the real value renders without SMIL; the count-up frames
+    # (base opacity 0, one short opacity window each, frozen back to 0) are
+    # pure progressive enhancement for viewers that animate
     frames = sorted(set([0] + [int(value * i / 7) for i in range(1, 7)] + [int(value)]))
-    n = len(frames)
+    m = len(frames)
     dur = 2.8
-    key_times = " ".join(f"{round(j / n, 3):.3f}" for j in range(n + 1))
-    stack = []
-    for i, v in enumerate(frames):
-        vals = " ".join("1" if j == i else "0" for j in range(n))
+    stack = [
+        f'<text x="{x + TILE_W // 2}" y="122" text-anchor="middle" '
+        f'font-family="Menlo, monospace" font-size="20" font-weight="700" '
+        f'fill="#e2e8f0">{value:,}</text>'
+    ]
+    for i, v in enumerate(frames[:-1]):
+        t0, t1 = round(i / m, 3), round((i + 1) / m, 3)
+        if t1 >= 1.0:
+            kts, vals = f"0;{t0};1", "0;1;0"
+        else:
+            kts, vals = f"0;{t0};{t1};1", "0;1;0;0"
         stack.append(
             f'<text x="{x + TILE_W // 2}" y="122" text-anchor="middle" '
             f'font-family="Menlo, monospace" font-size="20" font-weight="700" '
             f'fill="#e2e8f0" opacity="0">{v:,}'
-            f'<animate attributeName="opacity" values="{vals}" keyTimes="{key_times}" '
-            f'calcMode="discrete" dur="{dur}s" begin="{delay}s" repeatCount="indefinite"/>'
-            f"</text>"
+            f'<animate attributeName="opacity" values="{vals}" keyTimes="{kts}" '
+            f'calcMode="linear" dur="{dur}s" begin="{delay}s" fill="freeze" '
+            f'repeatCount="1"/></text>'
         )
     parts.append(
-        f'<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.5s" '
-        f'begin="{delay}s" fill="freeze"/>'
+        f'<g>'
         f'<rect x="{x}" y="62" width="{TILE_W}" height="76" rx="10" fill="#111834" '
         f'stroke="#7c6cf033"/>'
         f'<text x="{x + TILE_W // 2}" y="94" text-anchor="middle" font-family="Menlo, monospace" '
@@ -166,7 +174,7 @@ for lang, b in top:
         f'<text x="26" y="{y + 4}" font-family="Menlo, monospace" font-size="12" '
         f'fill="#94a3b8">{lang}</text>'
         f'<rect x="130" y="{y - 7}" width="300" height="10" rx="5" fill="#1e293b"/>'
-        f'<rect x="130" y="{y - 7}" width="0" height="10" rx="5" fill="{color}">'
+        f'<rect x="130" y="{y - 7}" width="{width}" height="10" rx="5" fill="{color}">'
         f'<animate attributeName="width" from="0" to="{width}" dur="0.7s" '
         f'begin="{round(0.2 + bar_i * 0.15, 2)}s" fill="freeze"/></rect>'
         f'<text x="440" y="{y + 4}" font-family="Menlo, monospace" font-size="12" '
