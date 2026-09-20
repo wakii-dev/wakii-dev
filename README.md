@@ -71,15 +71,15 @@
 ## 📊 Mission control
 
 <div align="center">
-  <img src="assets/mission-control.svg" width="100%" alt="mission control stats" />
+  <img src="assets/mission-control.svg?v=1758355200" width="100%" alt="mission control stats" />
 </div>
 
 ## 🧊 Contributions in 3D
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="profile-3d-contrib/profile-green-animate-dark.svg" />
-    <img src="profile-3d-contrib/profile-green-animate.svg" width="100%" alt="3D contribution graph" />
+    <source media="(prefers-color-scheme: dark)" srcset="profile-3d-contrib/profile-green-animate-dark.svg?v=1758355200" />
+    <img src="profile-3d-contrib/profile-green-animate.svg?v=1758355200" width="100%" alt="3D contribution graph" />
   </picture>
 </div>
 

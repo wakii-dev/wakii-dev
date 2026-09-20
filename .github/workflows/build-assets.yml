@@ -50,12 +50,32 @@ jobs:
           USER: wakii-dev
         run: python3 scripts/render_stats.py
 
+      # ---- cache-bust README image URLs whenever their asset changed,
+      #      so profile visitors never get a stale CDN/browser copy ----
+      - name: Bump README cache-busting versions
+        run: |
+          python3 - <<'PY'
+          import re, subprocess, time
+          ts = str(int(time.time()))
+          def changed(p):
+              return subprocess.run(["git", "diff", "--quiet", "HEAD", "--", p]).returncode != 0
+          md = open("README.md").read()
+          if changed("assets/mission-control.svg"):
+              md = re.sub(r"assets/mission-control\.svg(\?v=\d+)?",
+                          f"assets/mission-control.svg?v={ts}", md)
+          if (changed("profile-3d-contrib/profile-green-animate.svg")
+                  or changed("profile-3d-contrib/profile-green-animate-dark.svg")):
+              md = re.sub(r"profile-3d-contrib/profile-green-animate(-dark)?\.svg(\?v=\d+)?",
+                          rf"profile-3d-contrib/profile-green-animate\1.svg?v={ts}", md)
+          open("README.md", "w").write(md)
+          PY
+
       # ---- commit generated assets ----
       - name: Commit generated assets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add profile-3d-contrib assets/mission-control.svg || true
+          git add README.md profile-3d-contrib assets/mission-control.svg || true
           if git diff --cached --quiet; then
             echo "nothing to update"
           else
