@@ -2,8 +2,12 @@
 """Render the profile 'mission control' stats panel as a self-hosted SVG.
 
 Fetches live numbers from the GitHub REST/GraphQL API with the workflow's
-GITHUB_TOKEN (no third-party stat services), then writes
-assets/mission-control.svg.
+GH_TOKEN (no third-party stat services), then writes assets/mission-control.svg.
+
+Stats mirror what GitHub itself shows on the profile: per-type contributions
+come from contributionsCollection (same source as the profile contribution
+summary), so the panel always matches the real numbers. Reviews are shown
+as the PR count per owner spec (PR reviews are not calendar-countable).
 """
 import json
 import os
@@ -51,30 +55,22 @@ while True:
 stars = sum(r["stargazers_count"] for r in repos)
 public_repos = user["public_repos"]
 
-# all-time commit count across public repos (paginated)
-total_commits = 0
-for r in repos:
-    page = 1
-    while True:
-        req = urllib.request.Request(
-            f"https://api.github.com/repos/{USER}/{r['name']}/commits?per_page=100&page={page}",
-            headers=HDR,
-        )
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            batch = json.load(resp)
-        if not batch:
-            break
-        total_commits += len(batch)
-        if len(batch) < 100:
-            break
-        page += 1
-
+# per-type contributions for the last year — the exact numbers GitHub's own
+# profile summary shows (commits, PRs, calendar total)
 data = gql(
-    "query($u:String!){ user(login:$u){ contributionsCollection "
-    "{ contributionCalendar { totalContributions } } } }",
+    "query($u:String!){ user(login:$u){ contributionsCollection { "
+    "totalCommitContributions totalPullRequestContributions "
+    "contributionCalendar { totalContributions } } } }",
     {"u": USER},
 )
-contribs = data["user"]["contributionsCollection"]["contributionCalendar"]["totalContributions"]
+cc = data["user"]["contributionsCollection"]
+commits_1y = cc["totalCommitContributions"]
+prs = cc["totalPullRequestContributions"]
+contribs = cc["contributionCalendar"]["totalContributions"]
+
+# owner spec: reviews shown as the PR count (GitHub does not expose
+# review contributions through the calendar)
+reviews = prs
 
 lang_bytes = {}
 for r in repos:
@@ -92,7 +88,9 @@ COLORS = {
 }
 
 tiles = [
-    ("Total commits", total_commits),
+    ("Commits (1y)", commits_1y),
+    ("Pull requests", prs),
+    ("Reviews", reviews),
     ("Stars", stars),
     ("Repos", public_repos),
     ("Contribs (1y)", contribs),
@@ -119,7 +117,10 @@ parts = [
     'font-size="12" fill="#475569">live &#183; auto-updated</text>',
 ]
 
-x = 26
+# 6 tiles across: 26px side margins, 8px gaps
+TILE_W, GAP, X0 = 124, 8, 26
+
+x = X0
 for label, value in tiles:
     delay = round(0.1 + len(parts) * 0.001, 3)
     # count-up animation: N stacked texts, SMIL discrete opacity windows
@@ -131,9 +132,9 @@ for label, value in tiles:
     for i, v in enumerate(frames):
         vals = " ".join("1" if j == i else "0" for j in range(n))
         stack.append(
-            f'<text x="{x + 95}" y="122" text-anchor="middle" '
-            f'font-family="Menlo, monospace" font-size="22" font-weight="700" '
-            f'fill="#e2e8f0" opacity="0">{v}'
+            f'<text x="{x + TILE_W // 2}" y="122" text-anchor="middle" '
+            f'font-family="Menlo, monospace" font-size="20" font-weight="700" '
+            f'fill="#e2e8f0" opacity="0">{v:,}'
             f'<animate attributeName="opacity" values="{vals}" keyTimes="{key_times}" '
             f'calcMode="discrete" dur="{dur}s" begin="{delay}s" repeatCount="indefinite"/>'
             f"</text>"
@@ -141,14 +142,14 @@ for label, value in tiles:
     parts.append(
         f'<g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.5s" '
         f'begin="{delay}s" fill="freeze"/>'
-        f'<rect x="{x}" y="62" width="190" height="76" rx="10" fill="#111834" '
+        f'<rect x="{x}" y="62" width="{TILE_W}" height="76" rx="10" fill="#111834" '
         f'stroke="#7c6cf033"/>'
-        f'<text x="{x + 95}" y="94" text-anchor="middle" font-family="Menlo, monospace" '
-        f'font-size="12" fill="#64748b">{label}</text>'
+        f'<text x="{x + TILE_W // 2}" y="94" text-anchor="middle" font-family="Menlo, monospace" '
+        f'font-size="11" fill="#64748b">{label}</text>'
         + "".join(stack)
         + "</g>"
     )
-    x += 200
+    x += TILE_W + GAP
 
 parts.append(
     '<text x="26" y="178" font-family="Menlo, monospace" font-size="13" '
@@ -179,5 +180,5 @@ parts.append("</svg>")
 os.makedirs("assets", exist_ok=True)
 with open(OUT, "w") as f:
     f.write("\n".join(parts))
-print(f"rendered {OUT}: followers={followers} stars={stars} repos={public_repos} "
-      f"contribs={contribs}")
+print(f"rendered {OUT}: commits(1y)={commits_1y} prs={prs} reviews={reviews} "
+      f"stars={stars} repos={public_repos} contribs={contribs}")
