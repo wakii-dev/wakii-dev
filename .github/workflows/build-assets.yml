@@ -22,6 +22,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: wakii-dev
 
+      # ---- radar: Review axis mirrors the PR count (bot reviews aren't
+      #      calendar-countable, so the action plots ~0) ----
+      - name: Patch 3D radar Review axis
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USER: wakii-dev
+        run: python3 scripts/patch_3d_review.py
+
       # ---- dark variant of the animated 3D graph (profile is dark-themed) ----
       - name: Dark-patch animated 3D
         run: |
