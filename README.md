@@ -78,8 +78,8 @@
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="profile-3d-contrib/profile-green-animate-dark.svg?v=1790480145" />
-    <img src="profile-3d-contrib/profile-green-animate.svg?v=1790480145" width="100%" alt="3D contribution graph" />
+    <source media="(prefers-color-scheme: dark)" srcset="profile-3d-contrib/profile-green-animate-dark.svg?v=1790566648" />
+    <img src="profile-3d-contrib/profile-green-animate.svg?v=1790566648" width="100%" alt="3D contribution graph" />
   </picture>
 </div>
 
