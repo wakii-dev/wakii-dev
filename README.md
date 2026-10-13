@@ -88,13 +88,13 @@
 ## 📊 Mission control
 
 <div align="center">
-  <img src="assets/mission-control.svg?v=1791881246" width="100%" alt="mission control stats" />
+  <img src="assets/mission-control.svg?v=1791883814" width="100%" alt="mission control stats" />
 </div>
 
 ## 🧊 Contributions in 3D
 
 <div align="center">
-  <img src="profile-3d-contrib/profile-green-animate.svg?v=1791881246" width="100%" alt="3D contribution graph" />
+  <img src="profile-3d-contrib/profile-green-animate.svg?v=1791883814" width="100%" alt="3D contribution graph" />
 </div>
 
 ## 🐍 Snake
