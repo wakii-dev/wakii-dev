@@ -1,15 +1,15 @@
-<svg width="620" height="264" viewBox="0 0 620 264" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="wakii up — terminal">
+<svg width="620" height="310" viewBox="0 0 620 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="wakii up — terminal">
   <style>
     :root {
       --bg1: #0d1224; --bg2: #0a0e1d; --bar: #111834; --stroke: #7c6cf055;
       --prompt: #94a3b8; --cmd: #e2e8f0; --vio: #c4b5fd; --dim: #475569;
-      --cyan: #67e8f9; --ok: #34d399; --accent: #f0abfc;
+      --cyan: #67e8f9; --ok: #34d399; --err: #f87171; --accent: #f0abfc;
     }
     @media (prefers-color-scheme: light) {
       :root {
-        --bg1: #ffffff; --bg2: #f6f4fb; --bar: #f0edf9; --stroke: #a78bfa66;
+        --bg1: #ffffff; --bg2: #f5f2fb; --bar: #f0edf9; --stroke: #a78bfa66;
         --prompt: #64748b; --cmd: #0f172a; --vio: #6D28D9; --dim: #94a3b8;
-        --cyan: #0e7490; --ok: #059669; --accent: #C026D3;
+        --cyan: #0e7490; --ok: #059669; --err: #dc2626; --accent: #C026D3;
       }
     }
     .tbg1 { stop-color: var(--bg1); } .tbg2 { stop-color: var(--bg2); }
@@ -19,6 +19,7 @@
     .prompt { fill: var(--prompt); } .cmd { fill: var(--cmd); }
     .vio { fill: var(--vio); } .dim { fill: var(--dim); }
     .cyan { fill: var(--cyan); } .ok { fill: var(--ok); }
+    .err { fill: var(--err); } .accent { fill: var(--accent); }
     .cursor { fill: var(--accent); }
   </style>
   <defs>
@@ -30,41 +31,51 @@
       <feGaussianBlur stdDeviation="3" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <clipPath id="clip"><rect x="1" y="1" width="618" height="262" rx="12"/></clipPath>
+    <clipPath id="clip"><rect x="1" y="1" width="618" height="308" rx="12"/></clipPath>
   </defs>
 
-  <rect x="1" y="1" width="618" height="262" rx="12" fill="url(#tbg)" class="frame" stroke-width="1.5"/>
+  <rect x="1" y="1" width="618" height="308" rx="12" fill="url(#tbg)" class="frame" stroke-width="1.5"/>
   <g clip-path="url(#clip)">
     <rect x="0" y="0" width="620" height="36" class="bar"/>
     <circle cx="22" cy="18" r="6" fill="#f87171"/><circle cx="42" cy="18" r="6" fill="#fbbf24"/><circle cx="62" cy="18" r="6" fill="#34d399"/>
     <text x="310" y="23" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="12" class="bar-title">wakii — zsh</text>
+    <text x="596" y="23" text-anchor="end" font-family="ui-monospace, Menlo, monospace" font-size="10" class="dim">⌘K</text>
 
-    <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14.5" filter="url(#tglow)">
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" filter="url(#tglow)">
       <g>
-        <text x="24" y="70" class="prompt">$ <tspan class="cmd" font-weight="600">wakii up</tspan></text>
+        <text x="24" y="66" class="prompt">$ <tspan class="cmd" font-weight="600">wakii up</tspan></text>
         <animate attributeName="opacity" values="0;1" dur="0.4s" fill="freeze"/>
       </g>
       <g opacity="0">
-        <text x="24" y="106" class="vio">▸ planning<tspan class="dim"> (spec → plan → dag)</tspan> <tspan class="ok">✔</tspan></text>
-        <animate attributeName="opacity" values="0;1" dur="0.3s" begin="0.9s" fill="freeze"/>
+        <text x="24" y="96" class="vio">▸ spec → plan → dag <tspan class="ok">✔</tspan></text>
+        <animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.0s" fill="freeze"/>
       </g>
       <g opacity="0">
-        <text x="24" y="142" class="vio">▸ agents: <tspan class="cmd">builder · tester · reviewer · shipper</tspan></text>
+        <text x="24" y="126" class="vio">▸ crew: <tspan class="cmd">2 critics · analyst · 4 executors</tspan></text>
         <animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.8s" fill="freeze"/>
       </g>
       <g opacity="0">
-        <text x="24" y="178" class="cyan">▸ building wakii… <tspan class="dim">2.5M orders later</tspan></text>
-        <animate attributeName="opacity" values="0;1" dur="0.3s" begin="2.7s" fill="freeze"/>
+        <text x="24" y="156" class="vio">⎇ worktrees <tspan class="cmd">w1 w2 w3 w4</tspan><tspan class="dim"> — parallel SFs</tspan></text>
+        <animate attributeName="opacity" values="0;1" dur="0.3s" begin="2.6s" fill="freeze"/>
       </g>
       <g opacity="0">
-        <text x="24" y="214" class="ok" font-weight="600">✔ shipped <tspan class="dim">— human approved · agents did the typing</tspan></text>
-        <animate attributeName="opacity" values="0;1" dur="0.3s" begin="3.8s" fill="freeze"/>
+        <text x="24" y="186" class="cyan">▸ gates: verify <tspan class="ok">✔</tspan> review <tspan class="ok">✔</tspan> audit <tspan class="ok">✔</tspan></text>
+        <animate attributeName="opacity" values="0;1" dur="0.3s" begin="3.5s" fill="freeze"/>
       </g>
       <g opacity="0">
-        <rect x="26" y="228" width="9" height="16" class="cursor">
+        <text x="24" y="216" class="dim"><tspan class="ok" font-weight="600">+512</tspan> <tspan class="err" font-weight="600">−48</tspan> across 12 files · <tspan class="ok">all checks passed</tspan></text>
+        <animate attributeName="opacity" values="0;1" dur="0.3s" begin="4.3s" fill="freeze"/>
+      </g>
+      <g opacity="0">
+        <text x="24" y="246" class="ok" font-weight="600">✔ shipped <tspan class="dim" font-weight="400">— human approved · agents did the typing</tspan></text>
+        <animate attributeName="opacity" values="0;1" dur="0.3s" begin="5.1s" fill="freeze"/>
+      </g>
+      <g opacity="0">
+        <text x="24" y="276" class="prompt">$ <tspan class="accent">wakii ship --next</tspan></text>
+        <rect x="220" y="264" width="9" height="15" class="cursor">
           <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
         </rect>
-        <animate attributeName="opacity" values="0;1" dur="0.2s" begin="4.6s" fill="freeze"/>
+        <animate attributeName="opacity" values="0;1" dur="0.2s" begin="5.9s" fill="freeze"/>
       </g>
     </g>
   </g>

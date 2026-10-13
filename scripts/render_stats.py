@@ -134,6 +134,8 @@ parts = [
     ".title{fill:var(--accent)}.live{fill:var(--t4)}.sect{fill:var(--cyan)}"
     ".val{fill:var(--t1)}.lbl{fill:var(--t3)}"
     ".lang{fill:var(--t2)}.pct{fill:var(--t3)}.track{fill:var(--track)}"
+    ".corner{stroke:var(--accent);fill:none;stroke-width:2;opacity:.5}"
+    ".divider{stroke:var(--stroke-soft)}.ldot{fill:var(--ok)}"
     "</style>",
     '<defs><linearGradient id="mbg" x1="0" y1="0" x2="1" y2="1">'
     '<stop offset="0" class="bg1"/><stop offset="1" class="bg2"/>'
@@ -151,6 +153,15 @@ parts = [
     'font-weight="700" class="title" filter="url(#mglow)">&#9656; MISSION CONTROL</text>',
     '<text x="814" y="40" text-anchor="end" font-family="Menlo, monospace" '
     'font-size="12" class="live">live &#183; auto-updated</text>',
+    # HUD corner brackets
+    '<path class="corner" d="M2 18 V9 Q2 2 9 2 H18"/>',
+    '<path class="corner" d="M822 2 H831 Q838 2 838 9 V18"/>',
+    '<path class="corner" d="M2 322 V331 Q2 338 9 338 H18"/>',
+    '<path class="corner" d="M822 338 H831 Q838 338 838 331 V322"/>',
+    # header divider + live pulse dot
+    '<line x1="26" y1="54" x2="814" y2="54" class="divider"/>',
+    '<circle cx="694" cy="36" r="3.5" class="ldot">'
+    '<animate attributeName="opacity" values="1;0.25;1" dur="2.2s" repeatCount="indefinite"/></circle>',
 ]
 
 # 6 tiles across: 26px side margins, 8px gaps

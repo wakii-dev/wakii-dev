@@ -1,27 +1,34 @@
-<svg width="840" height="220" viewBox="0 0 840 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="how the crew ships">
+<svg width="840" height="240" viewBox="0 0 840 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="how the crew ships">
   <style>
     :root {
       --bg1: #0b1020; --bg2: #140b26; --panel: #111834; --stroke: #7c6cf055;
       --stroke-mid: #7c6cf066; --ok: #34d399; --warn: #fbbf24;
       --accent: #f0abfc; --cyan: #7dd3fc; --t1: #e2e8f0; --t3: #64748b; --t4: #475569;
+      --num: #c4b5fd;
     }
     @media (prefers-color-scheme: light) {
       :root {
-        --bg1: #f8f7fc; --bg2: #f2ecfb; --panel: #ffffff; --stroke: #a78bfa66;
+        --bg1: #f8f7fc; --bg2: #f1ebfa; --panel: #ffffff; --stroke: #a78bfa66;
         --stroke-mid: #a78bfa80; --ok: #059669; --warn: #b45309;
         --accent: #C026D3; --cyan: #0369a1; --t1: #1e293b; --t3: #64748b; --t4: #94a3b8;
+        --num: #6D28D9;
       }
     }
     .bg1 { stop-color: var(--bg1); } .bg2 { stop-color: var(--bg2); }
     .panel { fill: var(--panel); }
     .frame { stroke: var(--stroke); }
     .step { stroke: var(--stroke-mid); }
+    .dash { stroke: var(--accent); stroke-opacity: 0.5; }
     .ok { stroke: var(--ok); stroke-opacity: 0.45; }
     .warn { stroke: var(--warn); stroke-opacity: 0.45; }
     .title { fill: var(--accent); } .footnote { fill: var(--t4); }
     .label { fill: var(--t1); } .agent { fill: var(--t3); }
+    .numbg { fill: var(--panel); stroke: var(--stroke-mid); }
+    .num { fill: var(--num); }
     .pulse { fill: var(--accent); }
     .note { fill: var(--cyan); } .hl { fill: var(--accent); }
+    .grid-p { stroke: var(--stroke-soft); } .grid-soft { --stroke-soft: #7c6cf01a; }
+    @media (prefers-color-scheme: light) { .grid-soft { --stroke-soft: #7c6cf014; } }
   </style>
   <defs>
     <linearGradient id="pbg" x1="0" y1="0" x2="1" y2="1">
@@ -37,60 +44,78 @@
   <text x="26" y="38" font-family="Menlo, monospace" font-size="15" font-weight="700" class="title" filter="url(#pglow)">▸ HOW THE CREW SHIPS</text>
   <text x="814" y="38" text-anchor="end" font-family="Menlo, monospace" font-size="11" class="footnote">one idea in · one PR out</text>
 
-  <!-- connector -->
-  <path id="flow" d="M 60 118 H 780" class="step" stroke-width="3" fill="none"/>
-
-  <!-- traveling pulse -->
-  <circle r="6" class="pulse" filter="url(#pglow)">
-    <animateMotion dur="3.2s" repeatCount="indefinite" rotate="auto">
+  <!-- connector: base + animated dashes + traveling pulse -->
+  <path id="flow" d="M 60 116 H 780" class="step" stroke-width="3" fill="none"/>
+  <path d="M 60 116 H 780" class="dash" stroke-width="1.5" fill="none" stroke-dasharray="5 9">
+    <animate attributeName="stroke-dashoffset" from="0" to="-28" dur="1.3s" repeatCount="indefinite"/>
+  </path>
+  <circle r="5.5" class="pulse" filter="url(#pglow)">
+    <animateMotion dur="3.4s" repeatCount="indefinite" rotate="auto">
       <mpath href="#flow"/>
     </animateMotion>
   </circle>
 
   <g font-family="Menlo, monospace" text-anchor="middle">
+    <!-- 01 idea -->
     <g>
-      <rect x="22" y="88" width="86" height="60" rx="10" class="panel step"/>
-      <text x="65" y="115" font-size="18">💡</text>
-      <text x="65" y="136" font-size="11" class="label">idea</text>
+      <rect x="22" y="86" width="86" height="60" rx="10" class="panel step"/>
+      <circle cx="22" cy="86" r="9" class="numbg"/><text x="22" y="89.5" font-size="9" class="num">01</text>
+      <text x="65" y="113" font-size="18">💡</text>
+      <text x="65" y="134" font-size="11" class="label">idea</text>
     </g>
+    <!-- 02 impact -->
     <g>
-      <rect x="146" y="88" width="86" height="60" rx="10" class="panel step"/>
-      <text x="189" y="115" font-size="18">🧭</text>
-      <text x="189" y="136" font-size="11" class="label">impact</text>
-      <text x="189" y="160" font-size="9.5" class="agent">phase0-analyst</text>
+      <rect x="146" y="86" width="86" height="60" rx="10" class="panel step"/>
+      <circle cx="146" cy="86" r="9" class="numbg"/><text x="146" y="89.5" font-size="9" class="num">02</text>
+      <text x="189" y="113" font-size="18">🧭</text>
+      <text x="189" y="134" font-size="11" class="label">impact</text>
+      <text x="189" y="162" font-size="9.5" class="agent">phase0-analyst</text>
     </g>
+    <!-- 03 plan -->
     <g>
-      <rect x="270" y="88" width="86" height="60" rx="10" class="panel step"/>
-      <text x="313" y="115" font-size="18">🗺️</text>
-      <text x="313" y="136" font-size="11" class="label">plan</text>
-      <text x="313" y="160" font-size="9.5" class="agent">plan-critic</text>
+      <rect x="270" y="86" width="86" height="60" rx="10" class="panel step"/>
+      <circle cx="270" cy="86" r="9" class="numbg"/><text x="270" y="89.5" font-size="9" class="num">03</text>
+      <text x="313" y="113" font-size="18">🗺️</text>
+      <text x="313" y="134" font-size="11" class="label">plan</text>
+      <text x="313" y="162" font-size="9.5" class="agent">plan-critic</text>
     </g>
+    <!-- 04 bracket -->
     <g>
-      <rect x="394" y="88" width="86" height="60" rx="10" class="panel step"/>
-      <text x="437" y="115" font-size="18">📋</text>
-      <text x="437" y="136" font-size="11" class="label">bracket</text>
-      <text x="437" y="160" font-size="9.5" class="agent">spec-critic</text>
+      <rect x="394" y="86" width="86" height="60" rx="10" class="panel step"/>
+      <circle cx="394" cy="86" r="9" class="numbg"/><text x="394" y="89.5" font-size="9" class="num">04</text>
+      <text x="437" y="113" font-size="18">📋</text>
+      <text x="437" y="134" font-size="11" class="label">bracket</text>
+      <text x="437" y="162" font-size="9.5" class="agent">spec-critic</text>
     </g>
+    <!-- 05 parallel SFs -->
     <g>
-      <rect x="518" y="88" width="86" height="60" rx="10" class="panel ok"/>
-      <text x="561" y="112" font-size="15">⚙️⚙️⚙️</text>
-      <text x="561" y="136" font-size="11" class="label">parallel SFs</text>
-      <text x="561" y="160" font-size="9.5" class="agent">executor+reviewer</text>
+      <rect x="518" y="86" width="86" height="60" rx="10" class="panel ok"/>
+      <circle cx="518" cy="86" r="9" class="numbg"/><text x="518" y="89.5" font-size="9" class="num">05</text>
+      <text x="561" y="111" font-size="15">⚙️⚙️⚙️</text>
+      <text x="561" y="134" font-size="11" class="label">parallel SFs</text>
+      <text x="561" y="162" font-size="9.5" class="agent">executor+reviewer</text>
+      <circle cx="561" cy="86" r="3" class="pulse">
+        <animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
     </g>
+    <!-- 06 gates -->
     <g>
-      <rect x="642" y="88" width="86" height="60" rx="10" class="panel warn"/>
-      <text x="685" y="115" font-size="18">🚦</text>
-      <text x="685" y="136" font-size="11" class="label">gates</text>
-      <text x="685" y="160" font-size="9.5" class="agent">verifier+audit</text>
+      <rect x="642" y="86" width="86" height="60" rx="10" class="panel warn"/>
+      <circle cx="642" cy="86" r="9" class="numbg"/><text x="642" y="89.5" font-size="9" class="num">06</text>
+      <text x="685" y="113" font-size="18">🚦</text>
+      <text x="685" y="134" font-size="11" class="label">gates</text>
+      <text x="685" y="162" font-size="9.5" class="agent">verifier+audit</text>
     </g>
+    <!-- 07 PR -->
     <g>
-      <rect x="766" y="88" width="58" height="60" rx="10" class="panel ok"/>
-      <text x="795" y="115" font-size="18">🚢</text>
-      <text x="795" y="136" font-size="11" class="label">PR</text>
+      <rect x="766" y="86" width="58" height="60" rx="10" class="panel ok"/>
+      <circle cx="766" cy="86" r="9" class="numbg"/><text x="766" y="89.5" font-size="9" class="num">07</text>
+      <text x="795" y="113" font-size="18">🚢</text>
+      <text x="795" y="134" font-size="11" class="label">PR</text>
     </g>
   </g>
 
-  <text x="420" y="196" text-anchor="middle" font-family="Menlo, monospace" font-size="11.5" class="note">
+  <text x="420" y="200" text-anchor="middle" font-family="Menlo, monospace" font-size="11.5" class="note">
     gates are adversarial by design — <tspan class="hl">self-approve isn't a gate</tspan>
   </text>
 </svg>

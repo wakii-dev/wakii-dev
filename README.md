@@ -94,20 +94,13 @@
 ## 🧊 Contributions in 3D
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="profile-3d-contrib/profile-green-animate-dark.svg?v=1791881246" />
-    <img src="profile-3d-contrib/profile-green-animate.svg?v=1791881246" width="100%" alt="3D contribution graph" />
-  </picture>
+  <img src="profile-3d-contrib/profile-green-animate.svg?v=1791881246" width="100%" alt="3D contribution graph" />
 </div>
 
 ## 🐍 Snake
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wakii-dev/wakii-dev/output/github-snake-dark.svg" />
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/wakii-dev/wakii-dev/output/github-snake.svg" />
-    <img alt="contribution snake" src="https://raw.githubusercontent.com/wakii-dev/wakii-dev/output/github-snake.svg" />
-  </picture>
+  <img alt="contribution snake" src="https://raw.githubusercontent.com/wakii-dev/wakii-dev/output/github-snake.svg" />
 </p>
 
 ---

@@ -30,18 +30,25 @@ jobs:
           USER: wakii-dev
         run: python3 scripts/patch_3d_review.py
 
-      # ---- dark variant of the animated 3D graph (profile is dark-themed) ----
-      - name: Dark-patch animated 3D
+      # ---- theme-neutral 3D graph: ONE svg that reads well on BOTH GitHub
+      #      light and dark canvases (transparent bg, mid-tone cells/text).
+      #      prefers-color-scheme follows the viewer's OS, not the GitHub
+      #      theme picker, and camo caches one variant — a neutral palette
+      #      is the only option that never shows the wrong theme. ----
+      - name: Theme-neutralize animated 3D
         run: |
-          sed -e 's/fill="rgb(239, 239, 239)"/fill="rgb(22, 27, 34)"/g' \
-              -e 's/fill="rgb(200, 200, 200)"/fill="rgb(30, 36, 44)"/g' \
-              -e 's/fill="rgb(167, 167, 167)"/fill="rgb(45, 51, 58)"/g' \
-              -e 's/fill="#ffffff"/fill="#0d1117"/g' \
-              -e 's/stroke: gray/stroke: #6e7681/g' \
-              -e 's/fill="gray"/fill="#8b949e"/g' \
-              -e 's/<style>\*/<style>text { fill: #e6edf3; }\*/' \
-            profile-3d-contrib/profile-green-animate.svg \
-            > profile-3d-contrib/profile-green-animate-dark.svg
+          sed -i -e 's|<rect x="0" y="0" width="1280" height="850" fill="#ffffff"></rect>||' \
+                 -e 's/fill="rgb(239, 239, 239)"/fill="rgb(148, 152, 168)"/g' \
+                 -e 's/fill="rgb(200, 200, 200)"/fill="rgb(118, 122, 138)"/g' \
+                 -e 's/fill="rgb(167, 167, 167)"/fill="rgb(90, 94, 110)"/g' \
+                 -e 's/fill="#00000f"/fill="#94a3b8"/g' \
+                 -e 's/fill="#111133"/fill="#94a3b8"/g' \
+                 -e 's/fill="gray"/fill="#7d8590"/g' \
+                 -e 's/ stroke="#ffffff" stroke-width="1px"//g' \
+                 -e 's/ stroke="#ffffff" stroke-width="2px"//g' \
+                 -e 's/ stroke="#ffffff"//g' \
+            profile-3d-contrib/profile-green-animate.svg
+          rm -f profile-3d-contrib/profile-green-animate-dark.svg
 
       # ---- Mission-control stats panel (self-rendered, no third-party service) ----
       - name: Render stats panel
@@ -63,10 +70,9 @@ jobs:
           if changed("assets/mission-control.svg"):
               md = re.sub(r"assets/mission-control\.svg(\?v=\d+)?",
                           f"assets/mission-control.svg?v={ts}", md)
-          if (changed("profile-3d-contrib/profile-green-animate.svg")
-                  or changed("profile-3d-contrib/profile-green-animate-dark.svg")):
-              md = re.sub(r"profile-3d-contrib/profile-green-animate(-dark)?\.svg(\?v=\d+)?",
-                          rf"profile-3d-contrib/profile-green-animate\1.svg?v={ts}", md)
+          if changed("profile-3d-contrib/profile-green-animate.svg"):
+              md = re.sub(r"profile-3d-contrib/profile-green-animate\.svg(\?v=\d+)?",
+                          rf"profile-3d-contrib/profile-green-animate.svg?v={ts}", md)
           open("README.md", "w").write(md)
           PY
 

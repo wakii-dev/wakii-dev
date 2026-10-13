@@ -1,29 +1,48 @@
-<svg width="840" height="240" viewBox="0 0 840 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wakii × HoiVu">
+<svg width="840" height="340" viewBox="0 0 840 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wakii — agentic IDE window">
   <style>
     :root {
       --bg1: #0b1020; --bg2: #140b26; --stroke: #7c6cf055; --grid: #7c6cf01a;
-      --pink: #f0abfc; --cyan: #67e8f9; --vio: #a78bfa;
-      --sub: #c4b5fd; --by: #7dd3fc;
+      --panel: #111834; --panel2: #0d1330; --stroke-soft: #7c6cf033;
+      --pink: #f0abfc; --cyan: #67e8f9; --vio: #a78bfa; --ok: #34d399;
+      --t1: #e2e8f0; --t2: #94a3b8; --t3: #64748b; --t4: #475569;
+      --sub: #c4b5fd;
       --sh-a: #a78bfa; --sh-b: #f0abfc; --sh-c: #67e8f9;
-      --ln-a: #6D28D9; --ln-b: #f0abfc; --ln-c: #67e8f9;
     }
     @media (prefers-color-scheme: light) {
       :root {
-        --bg1: #f8f7fc; --bg2: #f2ecfb; --stroke: #a78bfa66; --grid: #7c6cf01f;
-        --pink: #C026D3; --cyan: #0891b2; --vio: #7c3aed;
-        --sub: #6D28D9; --by: #0369a1;
+        --bg1: #f8f7fc; --bg2: #f1ebfa; --stroke: #a78bfa66; --grid: #7c6cf01f;
+        --panel: #ffffff; --panel2: #f4f1fb; --stroke-soft: #a78bfa38;
+        --pink: #C026D3; --cyan: #0891b2; --vio: #7c3aed; --ok: #059669;
+        --t1: #1e293b; --t2: #475569; --t3: #64748b; --t4: #94a3b8;
+        --sub: #6D28D9;
         --sh-a: #7c3aed; --sh-b: #c026d3; --sh-c: #0891b2;
-        --ln-a: #7c3aed; --ln-b: #c026d3; --ln-c: #0891b2;
       }
     }
     .bg1 { stop-color: var(--bg1); } .bg2 { stop-color: var(--bg2); }
     .sh-a { stop-color: var(--sh-a); } .sh-b { stop-color: var(--sh-b); } .sh-c { stop-color: var(--sh-c); }
-    .ln-a { stop-color: var(--ln-a); } .ln-b { stop-color: var(--ln-b); } .ln-c { stop-color: var(--ln-c); }
     .frame { stroke: var(--stroke); }
     .grid-p { stroke: var(--grid); }
-    .dot-p { fill: var(--pink); } .dot-c { fill: var(--cyan); } .dot-v { fill: var(--vio); }
-    .shine { fill: url(#shine); }
-    .sub { fill: var(--sub); } .by { fill: var(--by); }
+    .bar { fill: var(--panel2); }
+    .tab-active { fill: var(--panel); }
+    .tab-line { stroke: var(--pink); }
+    .tab-txt-a { fill: var(--t1); } .tab-txt { fill: var(--t3); }
+    .divider { stroke: var(--stroke-soft); }
+    .tree { fill: var(--t3); } .tree-hot { fill: var(--pink); } .tree-sub { fill: var(--t4); }
+    .wordmark { fill: url(#shine); }
+    .rule { fill: url(#line); }
+    .sub { fill: var(--sub); }
+    .panel { fill: var(--panel); stroke: var(--stroke-soft); }
+    .chip { fill: var(--panel); stroke: var(--stroke-soft); }
+    .chip-txt { fill: var(--t2); }
+    .dot-ok { fill: var(--ok); } .dot-p { fill: var(--pink); }
+    .dot-c { fill: var(--cyan); } .dot-v { fill: var(--vio); }
+    .fleet-h { fill: var(--t4); }
+    .fleet-name { fill: var(--t2); }
+    .typing-hint { fill: var(--pink); }
+    .cmd { fill: var(--t2); } .cmd-hot { fill: var(--t1); }
+    .cursor { fill: var(--pink); }
+    .status { fill: var(--t3); } .status-hot { fill: var(--t2); }
+    .status-ok { fill: var(--ok); } .status-brand { fill: var(--pink); }
   </style>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -34,53 +53,128 @@
       <stop offset="0" class="sh-a"/>
       <stop offset="0.5" class="sh-b"/>
       <stop offset="1" class="sh-c"/>
-      <animateTransform attributeName="gradientTransform" type="translate" from="-1 0" to="1 0" dur="3.2s" repeatCount="indefinite"/>
+      <animateTransform attributeName="gradientTransform" type="translate" from="-1 0" to="1 0" dur="3.4s" repeatCount="indefinite"/>
     </linearGradient>
     <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" class="ln-a" stop-opacity="0"/>
-      <stop offset="0.5" class="ln-b" stop-opacity="0.9"/>
-      <stop offset="1" class="ln-c" stop-opacity="0"/>
+      <stop offset="0" stop-color="#6D28D9" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#f0abfc" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#67e8f9" stop-opacity="0"/>
       <animateTransform attributeName="gradientTransform" type="translate" from="1 0" to="-1 0" dur="4s" repeatCount="indefinite"/>
     </linearGradient>
     <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feGaussianBlur stdDeviation="5" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
       <path d="M28 0H0V28" fill="none" class="grid-p" stroke-width="1"/>
     </pattern>
+    <clipPath id="win"><rect x="2" y="2" width="836" height="336" rx="16"/></clipPath>
   </defs>
 
-  <rect x="2" y="2" width="836" height="236" rx="16" fill="url(#bg)" class="frame" stroke-width="1.5"/>
-  <rect x="2" y="2" width="836" height="236" rx="16" fill="url(#grid)"/>
+  <rect x="2" y="2" width="836" height="336" rx="16" fill="url(#bg)" class="frame" stroke-width="1.5"/>
+  <g clip-path="url(#win)">
+    <rect x="2" y="2" width="836" height="336" fill="url(#grid)"/>
 
-  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
-    <circle cx="70" cy="60" r="4" class="dot-p">
-      <animate attributeName="cy" values="60;52;60" dur="3.4s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="3.4s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="150" cy="44" r="3" class="dot-c">
-      <animate attributeName="cy" values="44;54;44" dur="4.1s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="1;0.4;1" dur="4.1s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="782" cy="52" r="4" class="dot-v">
-      <animate attributeName="cy" values="52;44;52" dur="3.8s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.6;1;0.6" dur="3.8s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="712" cy="40" r="3" class="dot-p">
-      <animate attributeName="cy" values="40;50;40" dur="4.6s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="1;0.5;1" dur="4.6s" repeatCount="indefinite"/>
-    </circle>
+    <!-- floating particles -->
+    <g>
+      <circle cx="210" cy="96" r="3" class="dot-p"><animate attributeName="cy" values="96;88;96" dur="3.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;1;0.5" dur="3.6s" repeatCount="indefinite"/></circle>
+      <circle cx="280" cy="72" r="2.5" class="dot-c"><animate attributeName="cy" values="72;80;72" dur="4.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.4;1" dur="4.4s" repeatCount="indefinite"/></circle>
+      <circle cx="760" cy="88" r="3" class="dot-v"><animate attributeName="cy" values="88;80;88" dur="3.9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;1;0.6" dur="3.9s" repeatCount="indefinite"/></circle>
+      <circle cx="250" cy="306" r="2.5" class="dot-v"><animate attributeName="cy" values="306;298;306" dur="4.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.4;0.9;0.4" dur="4.8s" repeatCount="indefinite"/></circle>
+      <circle cx="640" cy="300" r="2.5" class="dot-p"><animate attributeName="cy" values="300;292;300" dur="4.1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0.4;0.9" dur="4.1s" repeatCount="indefinite"/></circle>
+    </g>
 
-    <text x="420" y="118" text-anchor="middle" font-size="64" font-weight="700" letter-spacing="14" class="shine" filter="url(#glow)">WAKII</text>
+    <!-- title bar -->
+    <circle cx="24" cy="20" r="6" fill="#f87171"/><circle cx="44" cy="20" r="6" fill="#fbbf24"/><circle cx="64" cy="20" r="6" fill="#34d399"/>
+    <text x="420" y="24" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="12" class="status">wakii — workspace</text>
+    <g font-family="ui-monospace, Menlo, monospace" font-size="9">
+      <circle cx="786" cy="20" r="4" class="dot-p"/><circle cx="800" cy="20" r="4" class="dot-v"/><circle cx="814" cy="20" r="4" class="dot-c"/>
+    </g>
+    <line x1="2" y1="38" x2="838" y2="38" class="divider"/>
 
-    <rect x="250" y="140" width="340" height="2" fill="url(#line)"/>
+    <!-- tab bar -->
+    <g font-family="ui-monospace, Menlo, monospace" font-size="11">
+      <rect x="16" y="42" width="112" height="24" rx="6" class="tab-active" stroke="var(--stroke-soft)"/>
+      <rect x="16" y="64" width="112" height="2" class="tab-line"/>
+      <text x="30" y="58" class="tab-txt-a">spec.md</text>
+      <text x="150" y="58" class="tab-txt">plan.yaml</text>
+      <text x="262" y="58" class="tab-txt">gates/</text>
+      <text x="352" y="58" class="tab-txt">crew/</text>
+    </g>
+    <line x1="2" y1="70" x2="838" y2="70" class="divider"/>
 
-    <text x="420" y="176" text-anchor="middle" font-size="19" class="sub">agentic IDE · superpowers team built-in</text>
+    <!-- sidebar: file tree -->
+    <g font-family="ui-monospace, Menlo, monospace" font-size="10.5">
+      <text x="24" y="94" class="tree-hot">&#9662; wakii/</text>
+      <text x="34" y="114" class="tree">&#9656; .wakii</text>
+      <text x="34" y="134" class="tree">&#9656; specs</text>
+      <text x="34" y="154" class="tree-hot">&#9662; agents</text>
+      <text x="48" y="174" class="tree-sub">9 online</text>
+      <text x="34" y="194" class="tree">&#9656; skills &#183; 20</text>
+      <text x="34" y="214" class="tree">&#9656; docs</text>
+      <text x="34" y="234" class="tree">&#9656; hub-store</text>
+      <text x="34" y="254" class="tree">&#9656; wakii-site</text>
+    </g>
+    <line x1="150" y1="70" x2="150" y2="318" class="divider"/>
 
-    <text x="420" y="208" text-anchor="middle" font-size="14" class="by" opacity="0.9">
-      <animate attributeName="opacity" values="0.45;1;0.45" dur="2.8s" repeatCount="indefinite"/>
-      by HoiVu × AI agents (Claude · Kiro)
-    </text>
+    <!-- main: wordmark -->
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+      <text x="405" y="176" text-anchor="middle" font-size="56" font-weight="700" letter-spacing="12" class="wordmark" filter="url(#glow)">WAKII</text>
+      <rect x="230" y="194" width="350" height="2" class="rule"/>
+      <text x="405" y="224" text-anchor="middle" font-size="15" class="sub">agentic IDE &#183; superpowers team built-in</text>
+
+      <!-- chips row -->
+      <g font-size="10.5">
+        <rect x="185" y="242" width="136" height="22" rx="11" class="chip"/>
+        <circle cx="201" cy="253" r="3.5" class="dot-ok"><animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/></circle>
+        <text x="211" y="257" class="chip-txt">9 agents online</text>
+        <rect x="331" y="242" width="112" height="22" rx="11" class="chip"/>
+        <text x="345" y="257" class="status-ok">&#10004;</text>
+        <text x="359" y="257" class="chip-txt">gates green</text>
+        <rect x="453" y="242" width="164" height="22" rx="11" class="chip"/>
+        <text x="467" y="257" class="chip-txt">&#9123; 2.5M orders shipped</text>
+      </g>
+
+      <!-- command line -->
+      <g font-size="13">
+        <text x="250" y="290" class="cmd">&gt; <tspan class="cmd-hot">orchestrating fleet</tspan></text>
+        <rect x="418" y="278" width="9" height="15" class="cursor">
+          <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    </g>
+
+    <!-- fleet presence panel -->
+    <g font-family="ui-monospace, Menlo, monospace">
+      <rect x="672" y="78" width="150" height="186" rx="10" class="panel"/>
+      <text x="688" y="100" font-size="9" letter-spacing="2" class="fleet-h">FLEET &#183; PRESENCE</text>
+      <g font-size="10">
+        <circle cx="692" cy="118" r="3" class="dot-p"><animate attributeName="opacity" values="1;0.35;1" dur="2.1s" repeatCount="indefinite"/></circle>
+        <text x="702" y="122" class="fleet-name">spec-critic</text>
+        <circle cx="692" cy="144" r="3" class="dot-c"><animate attributeName="opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite"/></circle>
+        <text x="702" y="148" class="fleet-name">impact</text>
+        <circle cx="692" cy="170" r="3" class="dot-v"><animate attributeName="opacity" values="1;0.4;1" dur="2.3s" repeatCount="indefinite"/></circle>
+        <text x="702" y="174" class="fleet-name">plan-critic</text>
+        <circle cx="692" cy="196" r="3" class="dot-ok"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.9s" repeatCount="indefinite"/></circle>
+        <text x="702" y="200" class="fleet-name">executor &#215;4</text>
+        <circle cx="692" cy="222" r="3" class="dot-p"><animate attributeName="opacity" values="1;0.35;1" dur="2.7s" repeatCount="indefinite"/></circle>
+        <text x="702" y="226" class="fleet-name">reviewer</text>
+        <circle cx="692" cy="248" r="3" class="dot-c"><animate attributeName="opacity" values="0.4;1;0.4" dur="2.4s" repeatCount="indefinite"/></circle>
+        <text x="702" y="252" class="fleet-name">verifier</text>
+      </g>
+      <text x="806" y="122" text-anchor="end" font-size="9" class="typing-hint">
+        typing&#8230;
+        <animate attributeName="opacity" values="0.2;1;0.2" dur="1.6s" repeatCount="indefinite"/>
+      </text>
+    </g>
+
+    <!-- status bar -->
+    <rect x="2" y="318" width="836" height="20" class="bar"/>
+    <g font-family="ui-monospace, Menlo, monospace" font-size="9.5">
+      <text x="24" y="332" class="status-hot">&#9123; main*</text>
+      <text x="120" y="332" class="status">&#9881; 9/9 agents</text>
+      <text x="238" y="332" class="status-ok">&#9679; gates: green</text>
+      <text x="816" y="332" text-anchor="end" class="status-brand">wakii.dev</text>
+    </g>
   </g>
 </svg>
