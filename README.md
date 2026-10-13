@@ -108,7 +108,7 @@ graph LR
 ## 📊 Mission control
 
 <div align="center">
-  <img src="assets/mission-control.svg?v=1791883814" width="100%" alt="mission control stats" />
+  <img src="assets/mission-control.svg?v=1791884865" width="100%" alt="mission control stats" />
 </div>
 
 ## 🧊 Contributions in 3D
