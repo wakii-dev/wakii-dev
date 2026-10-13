@@ -121,8 +121,22 @@ tiles = [
 parts = [
     '<svg width="840" height="340" viewBox="0 0 840 340" '
     'xmlns="http://www.w3.org/2000/svg" role="img" aria-label="mission control">',
+    "<style>"
+    ":root{--bg1:#0b1020;--bg2:#140b26;--panel:#111834;--stroke:#7c6cf055;"
+    "--stroke-soft:#7c6cf033;--accent:#f0abfc;--cyan:#67e8f9;"
+    "--t1:#e2e8f0;--t2:#94a3b8;--t3:#64748b;--t4:#475569;--track:#1e293b}"
+    "@media (prefers-color-scheme:light){:root{--bg1:#f8f7fc;--bg2:#f2ecfb;"
+    "--panel:#ffffff;--stroke:#a78bfa66;--stroke-soft:#a78bfa40;"
+    "--accent:#C026D3;--cyan:#0369a1;"
+    "--t1:#1e293b;--t2:#475569;--t3:#64748b;--t4:#94a3b8;--track:#e2e8f0}}"
+    ".bg1{stop-color:var(--bg1)}.bg2{stop-color:var(--bg2)}"
+    ".panel{fill:var(--panel)}.frame{stroke:var(--stroke)}"
+    ".title{fill:var(--accent)}.live{fill:var(--t4)}.sect{fill:var(--cyan)}"
+    ".val{fill:var(--t1)}.lbl{fill:var(--t3)}"
+    ".lang{fill:var(--t2)}.pct{fill:var(--t3)}.track{fill:var(--track)}"
+    "</style>",
     '<defs><linearGradient id="mbg" x1="0" y1="0" x2="1" y2="1">'
-    '<stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#140b26"/>'
+    '<stop offset="0" class="bg1"/><stop offset="1" class="bg2"/>'
     "</linearGradient>"
     '<linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">'
     '<stop offset="0" stop-color="#6D28D9"/><stop offset="1" stop-color="#f0abfc"/>'
@@ -132,11 +146,11 @@ parts = [
     '<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>'
     "</filter></defs>",
     '<rect x="2" y="2" width="836" height="336" rx="14" fill="url(#mbg)" '
-    'stroke="#7c6cf055" stroke-width="1.5"/>',
+    'class="frame" stroke-width="1.5"/>',
     '<text x="26" y="40" font-family="Menlo, monospace" font-size="15" '
-    'font-weight="700" fill="#f0abfc" filter="url(#mglow)">&#9656; MISSION CONTROL</text>',
+    'font-weight="700" class="title" filter="url(#mglow)">&#9656; MISSION CONTROL</text>',
     '<text x="814" y="40" text-anchor="end" font-family="Menlo, monospace" '
-    'font-size="12" fill="#475569">live &#183; auto-updated</text>',
+    'font-size="12" class="live">live &#183; auto-updated</text>',
 ]
 
 # 6 tiles across: 26px side margins, 8px gaps
@@ -154,7 +168,7 @@ for label, value in tiles:
     stack = [
         f'<text x="{x + TILE_W // 2}" y="122" text-anchor="middle" '
         f'font-family="Menlo, monospace" font-size="20" font-weight="700" '
-        f'fill="#e2e8f0">{value:,}</text>'
+        f'class="val">{value:,}</text>'
     ]
     for i, v in enumerate(frames[:-1]):
         t0, t1 = round(i / m, 3), round((i + 1) / m, 3)
@@ -165,17 +179,17 @@ for label, value in tiles:
         stack.append(
             f'<text x="{x + TILE_W // 2}" y="122" text-anchor="middle" '
             f'font-family="Menlo, monospace" font-size="20" font-weight="700" '
-            f'fill="#e2e8f0" opacity="0">{v:,}'
+            f'class="val" opacity="0">{v:,}'
             f'<animate attributeName="opacity" values="{vals}" keyTimes="{kts}" '
             f'calcMode="linear" dur="{dur}s" begin="{delay}s" fill="freeze" '
             f'repeatCount="1"/></text>'
         )
     parts.append(
         f'<g>'
-        f'<rect x="{x}" y="62" width="{TILE_W}" height="76" rx="10" fill="#111834" '
-        f'stroke="#7c6cf033"/>'
+        f'<rect x="{x}" y="62" width="{TILE_W}" height="76" rx="10" class="panel" '
+        f'style="stroke:var(--stroke-soft)"/>'
         f'<text x="{x + TILE_W // 2}" y="94" text-anchor="middle" font-family="Menlo, monospace" '
-        f'font-size="11" fill="#64748b">{label}</text>'
+        f'font-size="11" class="lbl">{label}</text>'
         + "".join(stack)
         + "</g>"
     )
@@ -183,7 +197,7 @@ for label, value in tiles:
 
 parts.append(
     '<text x="26" y="178" font-family="Menlo, monospace" font-size="13" '
-    'font-weight="700" fill="#67e8f9">&#9656; LANGUAGES (by bytes, public repos)</text>'
+    'font-weight="700" class="sect">&#9656; LANGUAGES (by bytes, public repos)</text>'
 )
 
 y = 210
@@ -194,13 +208,13 @@ for lang, b in top:
     color = COLORS.get(lang, "#a78bfa")
     parts.append(
         f'<text x="26" y="{y + 4}" font-family="Menlo, monospace" font-size="12" '
-        f'fill="#94a3b8">{lang}</text>'
-        f'<rect x="130" y="{y - 7}" width="300" height="10" rx="5" fill="#1e293b"/>'
+        f'class="lang">{lang}</text>'
+        f'<rect x="130" y="{y - 7}" width="300" height="10" rx="5" class="track"/>'
         f'<rect x="130" y="{y - 7}" width="{width}" height="10" rx="5" fill="{color}">'
         f'<animate attributeName="width" from="0" to="{width}" dur="0.7s" '
         f'begin="{round(0.2 + bar_i * 0.15, 2)}s" fill="freeze"/></rect>'
         f'<text x="440" y="{y + 4}" font-family="Menlo, monospace" font-size="12" '
-        f'fill="#64748b">{pct}%</text>'
+        f'class="pct">{pct}%</text>'
     )
     y += 28
     bar_i += 1

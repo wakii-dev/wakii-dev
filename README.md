@@ -32,14 +32,14 @@
 
 ## 🚀 What I'm building
 
-### ⚡ [Wakii](https://wakii.dev) — agentic IDE
-> The IDE where the team comes built-in: a superpowers crew of agents that
-> runs brainstorming → specs → plans → parallel execution → review.
+### ⚡ [Wakii](https://wakii.dev) — agentic IDE (ADE)
+> The desktop for working with a **fleet of parallel coding agents** — run any
+> coding agent with your own subscription. Available on desktop, mobile & VPS.
 
-- Official site: [wakii.dev](https://wakii.dev) · [`wakii-site`](https://github.com/wakii-dev/wakii-site)
+- Core: [`wakii`](https://github.com/wakii-dev/wakii) (TypeScript) · site: [wakii.dev](https://wakii.dev) → [`wakii-site`](https://github.com/wakii-dev/wakii-site) (Astro)
 - Docs, skills catalog (20 built-in skills), public roadmap & downloads
 
-### 🏗️ [hub-store](https://github.com/wakii-dev/hub-store) — fulfillment operations platform
+### 🏗️ [hub-store](https://github.com/wakii-dev/hub-store) — fulfillment operations platform *(private)*
 > Production-grade logistics platform exercised at **2.5M+ orders / year scale**:
 > order coordination, warehouse picking batches, D2C carrier hand-off,
 > technician dispatch, COD settlement, label printing.
@@ -49,10 +49,27 @@
 - PostgreSQL (dual-DB), Kafka side-channel, Keycloak OIDC, pnpm + Turborepo
 - Full QA story: role-matrix regression suites, Playwright e2e, CI on Actions
 
+### 🧪 More builds
+- 🎧 [`iloveenglishclub`](https://github.com/wakii-dev/iloveenglishclub) — English listening
+  dictation practice following the Cambridge Prepare path (Pre-A1 → B2 First)
+  · Next.js 15 + Drizzle + Auth.js + Neon Postgres
+- 🛒 [`ecommerce`](https://github.com/wakii-dev/ecommerce) — Spring Boot 3 microservices +
+  React/Vite microfrontends (Module Federation), Tiki-inspired storefront
+  · PostgreSQL · Redis · RabbitMQ · MongoDB · Elasticsearch · Stripe
+- 🎯 `wakii-english` *(private)* — AI IELTS prep for Vietnamese learners: AI Writing/Speaking
+  scoring (≤ 0.5 band), personalized roadmap, multi-tenant LMS
+  · Spring Boot 3 + Next.js/Vite + Kafka + Postgres RLS
+- 🔌 `cc-driver` *(private)* — TypeScript driver to orchestrate Claude Code headless
+  (agents, pools, goal/loop, background jobs) + schema-validated LLM calls
+  · GLM (z.ai) / Claude multi-provider, zero runtime deps
+- 🚚 `wakii-infra` *(private)* — deploy infrastructure: compose, runtime Dockerfiles,
+  Keycloak, Postgres init, observability
+
 ## 🧰 Stack I work with
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white)
 ![Astro](https://img.shields.io/badge/Astro-BC52EE?style=flat-square&logo=astro&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)

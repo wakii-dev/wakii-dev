@@ -1,10 +1,31 @@
 <svg width="840" height="220" viewBox="0 0 840 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="how the crew ships">
+  <style>
+    :root {
+      --bg1: #0b1020; --bg2: #140b26; --panel: #111834; --stroke: #7c6cf055;
+      --stroke-mid: #7c6cf066; --ok: #34d399; --warn: #fbbf24;
+      --accent: #f0abfc; --cyan: #7dd3fc; --t1: #e2e8f0; --t3: #64748b; --t4: #475569;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg1: #f8f7fc; --bg2: #f2ecfb; --panel: #ffffff; --stroke: #a78bfa66;
+        --stroke-mid: #a78bfa80; --ok: #059669; --warn: #b45309;
+        --accent: #C026D3; --cyan: #0369a1; --t1: #1e293b; --t3: #64748b; --t4: #94a3b8;
+      }
+    }
+    .bg1 { stop-color: var(--bg1); } .bg2 { stop-color: var(--bg2); }
+    .panel { fill: var(--panel); }
+    .frame { stroke: var(--stroke); }
+    .step { stroke: var(--stroke-mid); }
+    .ok { stroke: var(--ok); stroke-opacity: 0.45; }
+    .warn { stroke: var(--warn); stroke-opacity: 0.45; }
+    .title { fill: var(--accent); } .footnote { fill: var(--t4); }
+    .label { fill: var(--t1); } .agent { fill: var(--t3); }
+    .pulse { fill: var(--accent); }
+    .note { fill: var(--cyan); } .hl { fill: var(--accent); }
+  </style>
   <defs>
     <linearGradient id="pbg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#140b26"/>
-    </linearGradient>
-    <linearGradient id="pline" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#6D28D9"/><stop offset="0.5" stop-color="#f0abfc"/><stop offset="1" stop-color="#67e8f9"/>
+      <stop offset="0" class="bg1"/><stop offset="1" class="bg2"/>
     </linearGradient>
     <filter id="pglow" x="-30%" y="-30%" width="160%" height="160%">
       <feGaussianBlur stdDeviation="3" result="b"/>
@@ -12,15 +33,15 @@
     </filter>
   </defs>
 
-  <rect x="2" y="2" width="836" height="216" rx="14" fill="url(#pbg)" stroke="#7c6cf055" stroke-width="1.5"/>
-  <text x="26" y="38" font-family="Menlo, monospace" font-size="15" font-weight="700" fill="#f0abfc" filter="url(#pglow)">▸ HOW THE CREW SHIPS</text>
-  <text x="814" y="38" text-anchor="end" font-family="Menlo, monospace" font-size="11" fill="#475569">one idea in · one PR out</text>
+  <rect x="2" y="2" width="836" height="216" rx="14" fill="url(#pbg)" class="frame" stroke-width="1.5"/>
+  <text x="26" y="38" font-family="Menlo, monospace" font-size="15" font-weight="700" class="title" filter="url(#pglow)">▸ HOW THE CREW SHIPS</text>
+  <text x="814" y="38" text-anchor="end" font-family="Menlo, monospace" font-size="11" class="footnote">one idea in · one PR out</text>
 
   <!-- connector -->
-  <path id="flow" d="M 60 118 H 780" stroke="#7c6cf033" stroke-width="3" fill="none"/>
+  <path id="flow" d="M 60 118 H 780" class="step" stroke-width="3" fill="none"/>
 
   <!-- traveling pulse -->
-  <circle r="6" fill="#f0abfc" filter="url(#pglow)">
+  <circle r="6" class="pulse" filter="url(#pglow)">
     <animateMotion dur="3.2s" repeatCount="indefinite" rotate="auto">
       <mpath href="#flow"/>
     </animateMotion>
@@ -28,48 +49,48 @@
 
   <g font-family="Menlo, monospace" text-anchor="middle">
     <g>
-      <rect x="22" y="88" width="86" height="60" rx="10" fill="#111834" stroke="#7c6cf066"/>
+      <rect x="22" y="88" width="86" height="60" rx="10" class="panel step"/>
       <text x="65" y="115" font-size="18">💡</text>
-      <text x="65" y="136" font-size="11" fill="#e2e8f0">idea</text>
+      <text x="65" y="136" font-size="11" class="label">idea</text>
     </g>
     <g>
-      <rect x="146" y="88" width="86" height="60" rx="10" fill="#111834" stroke="#7c6cf066"/>
+      <rect x="146" y="88" width="86" height="60" rx="10" class="panel step"/>
       <text x="189" y="115" font-size="18">🧭</text>
-      <text x="189" y="136" font-size="11" fill="#e2e8f0">impact</text>
-      <text x="189" y="160" font-size="9.5" fill="#64748b">phase0-analyst</text>
+      <text x="189" y="136" font-size="11" class="label">impact</text>
+      <text x="189" y="160" font-size="9.5" class="agent">phase0-analyst</text>
     </g>
     <g>
-      <rect x="270" y="88" width="86" height="60" rx="10" fill="#111834" stroke="#7c6cf066"/>
+      <rect x="270" y="88" width="86" height="60" rx="10" class="panel step"/>
       <text x="313" y="115" font-size="18">🗺️</text>
-      <text x="313" y="136" font-size="11" fill="#e2e8f0">plan</text>
-      <text x="313" y="160" font-size="9.5" fill="#64748b">plan-critic</text>
+      <text x="313" y="136" font-size="11" class="label">plan</text>
+      <text x="313" y="160" font-size="9.5" class="agent">plan-critic</text>
     </g>
     <g>
-      <rect x="394" y="88" width="86" height="60" rx="10" fill="#111834" stroke="#7c6cf066"/>
+      <rect x="394" y="88" width="86" height="60" rx="10" class="panel step"/>
       <text x="437" y="115" font-size="18">📋</text>
-      <text x="437" y="136" font-size="11" fill="#e2e8f0">bracket</text>
-      <text x="437" y="160" font-size="9.5" fill="#64748b">spec-critic</text>
+      <text x="437" y="136" font-size="11" class="label">bracket</text>
+      <text x="437" y="160" font-size="9.5" class="agent">spec-critic</text>
     </g>
     <g>
-      <rect x="518" y="88" width="86" height="60" rx="10" fill="#111834" stroke="#34d39966"/>
+      <rect x="518" y="88" width="86" height="60" rx="10" class="panel ok"/>
       <text x="561" y="112" font-size="15">⚙️⚙️⚙️</text>
-      <text x="561" y="136" font-size="11" fill="#e2e8f0">parallel SFs</text>
-      <text x="561" y="160" font-size="9.5" fill="#64748b">executor+reviewer</text>
+      <text x="561" y="136" font-size="11" class="label">parallel SFs</text>
+      <text x="561" y="160" font-size="9.5" class="agent">executor+reviewer</text>
     </g>
     <g>
-      <rect x="642" y="88" width="86" height="60" rx="10" fill="#111834" stroke="#fbbf2466"/>
+      <rect x="642" y="88" width="86" height="60" rx="10" class="panel warn"/>
       <text x="685" y="115" font-size="18">🚦</text>
-      <text x="685" y="136" font-size="11" fill="#e2e8f0">gates</text>
-      <text x="685" y="160" font-size="9.5" fill="#64748b">verifier+audit</text>
+      <text x="685" y="136" font-size="11" class="label">gates</text>
+      <text x="685" y="160" font-size="9.5" class="agent">verifier+audit</text>
     </g>
     <g>
-      <rect x="766" y="88" width="58" height="60" rx="10" fill="#111834" stroke="#34d39966"/>
+      <rect x="766" y="88" width="58" height="60" rx="10" class="panel ok"/>
       <text x="795" y="115" font-size="18">🚢</text>
-      <text x="795" y="136" font-size="11" fill="#e2e8f0">PR</text>
+      <text x="795" y="136" font-size="11" class="label">PR</text>
     </g>
   </g>
 
-  <text x="420" y="196" text-anchor="middle" font-family="Menlo, monospace" font-size="11.5" fill="#7dd3fc">
-    gates are adversarial by design — <tspan fill="#f0abfc">self-approve isn't a gate</tspan>
+  <text x="420" y="196" text-anchor="middle" font-family="Menlo, monospace" font-size="11.5" class="note">
+    gates are adversarial by design — <tspan class="hl">self-approve isn't a gate</tspan>
   </text>
 </svg>

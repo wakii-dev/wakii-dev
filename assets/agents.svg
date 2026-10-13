@@ -1,10 +1,31 @@
 <svg width="840" height="470" viewBox="0 0 840 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wakii agent crew">
+  <style>
+    :root {
+      --bg1: #0b1020; --bg2: #140b26; --panel: #111834; --stroke: #7c6cf055; --stroke-soft: #7c6cf033;
+      --accent: #f0abfc; --t1: #e2e8f0; --t2: #94a3b8; --t3: #64748b; --t4: #475569;
+      --bar-a: #6D28D9; --bar-b: #f0abfc;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg1: #f8f7fc; --bg2: #f2ecfb; --panel: #ffffff; --stroke: #a78bfa66; --stroke-soft: #a78bfa40;
+        --accent: #C026D3; --t1: #1e293b; --t2: #475569; --t3: #64748b; --t4: #94a3b8;
+        --bar-a: #7c3aed; --bar-b: #c026d3;
+      }
+    }
+    .bg1 { stop-color: var(--bg1); } .bg2 { stop-color: var(--bg2); }
+    .bar-a { stop-color: var(--bar-a); } .bar-b { stop-color: var(--bar-b); }
+    .panel { fill: var(--panel); stroke: var(--stroke-soft); }
+    .frame { stroke: var(--stroke); }
+    .title { fill: var(--accent); } .footnote { fill: var(--t4); }
+    .name { fill: var(--t1); } .desc { fill: var(--t2); }
+    .bar { fill: url(#abar); }
+  </style>
   <defs>
     <linearGradient id="abg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#140b26"/>
+      <stop offset="0" class="bg1"/><stop offset="1" class="bg2"/>
     </linearGradient>
     <linearGradient id="abar" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#6D28D9"/><stop offset="1" stop-color="#f0abfc"/>
+      <stop offset="0" class="bar-a"/><stop offset="1" class="bar-b"/>
     </linearGradient>
     <filter id="aglow" x="-30%" y="-30%" width="160%" height="160%">
       <feGaussianBlur stdDeviation="3" result="b"/>
@@ -12,85 +33,85 @@
     </filter>
   </defs>
 
-  <rect x="2" y="2" width="836" height="466" rx="16" fill="url(#abg)" stroke="#7c6cf055" stroke-width="1.5"/>
-  <text x="26" y="42" font-family="Menlo, monospace" font-size="16" font-weight="700" fill="#f0abfc" filter="url(#aglow)">▸ MEET THE CREW</text>
-  <text x="814" y="42" text-anchor="end" font-family="Menlo, monospace" font-size="12" fill="#475569">ships with every wakii install</text>
+  <rect x="2" y="2" width="836" height="466" rx="16" fill="url(#abg)" class="frame" stroke-width="1.5"/>
+  <text x="26" y="42" font-family="Menlo, monospace" font-size="16" font-weight="700" class="title" filter="url(#aglow)">▸ MEET THE CREW</text>
+  <text x="814" y="42" text-anchor="end" font-family="Menlo, monospace" font-size="12" class="footnote">ships with every wakii install</text>
 
   <!-- row 1 -->
-  <g>
-    <rect x="26" y="64" width="252" height="112" rx="10" fill="#111834" stroke="#7c6cf033"/>
+  <g font-family="Menlo, monospace">
+    <rect x="26" y="64" width="252" height="112" rx="10" class="panel"/>
     <text x="46" y="98" font-size="24">📐</text>
-    <text x="82" y="96" font-family="Menlo, monospace" font-size="14" font-weight="700" fill="#e2e8f0">spec-critic</text>
-    <text x="82" y="114" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">adversarial spec review —</text>
-    <text x="82" y="128" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">kills ambiguity before code</text>
-    <rect x="46" y="146" width="212" height="3" rx="1.5" fill="url(#abar)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" repeatCount="indefinite"/></rect>
+    <text x="82" y="96" font-size="14" font-weight="700" class="name">spec-critic</text>
+    <text x="82" y="114" font-size="11" class="desc">adversarial spec review —</text>
+    <text x="82" y="128" font-size="11" class="desc">kills ambiguity before code</text>
+    <rect x="46" y="146" width="212" height="3" rx="1.5" class="bar"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" repeatCount="indefinite"/></rect>
   </g>
-  <g>
-    <rect x="294" y="64" width="252" height="112" rx="10" fill="#111834" stroke="#7c6cf033"/>
+  <g font-family="Menlo, monospace">
+    <rect x="294" y="64" width="252" height="112" rx="10" class="panel"/>
     <text x="314" y="98" font-size="24">🧭</text>
-    <text x="350" y="96" font-family="Menlo, monospace" font-size="14" font-weight="700" fill="#e2e8f0">impact-analyst</text>
-    <text x="350" y="114" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">phase-0 blast radius:</text>
-    <text x="350" y="128" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">what a change touches, everywhere</text>
-    <rect x="314" y="146" width="212" height="3" rx="1.5" fill="url(#abar)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0.3s" repeatCount="indefinite"/></rect>
+    <text x="350" y="96" font-size="14" font-weight="700" class="name">impact-analyst</text>
+    <text x="350" y="114" font-size="11" class="desc">phase-0 blast radius:</text>
+    <text x="350" y="128" font-size="11" class="desc">what a change touches, everywhere</text>
+    <rect x="314" y="146" width="212" height="3" rx="1.5" class="bar"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0.3s" repeatCount="indefinite"/></rect>
   </g>
-  <g>
-    <rect x="562" y="64" width="252" height="112" rx="10" fill="#111834" stroke="#7c6cf033"/>
+  <g font-family="Menlo, monospace">
+    <rect x="562" y="64" width="252" height="112" rx="10" class="panel"/>
     <text x="582" y="98" font-size="24">🗺️</text>
-    <text x="618" y="96" font-family="Menlo, monospace" font-size="14" font-weight="700" fill="#e2e8f0">plan-critic</text>
-    <text x="618" y="114" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">reviews the plan + task DAG —</text>
-    <text x="618" y="128" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">catches deadlocks pre-execution</text>
-    <rect x="582" y="146" width="212" height="3" rx="1.5" fill="url(#abar)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0.6s" repeatCount="indefinite"/></rect>
+    <text x="618" y="96" font-size="14" font-weight="700" class="name">plan-critic</text>
+    <text x="618" y="114" font-size="11" class="desc">reviews the plan + task DAG —</text>
+    <text x="618" y="128" font-size="11" class="desc">catches deadlocks pre-execution</text>
+    <rect x="582" y="146" width="212" height="3" rx="1.5" class="bar"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0.6s" repeatCount="indefinite"/></rect>
   </g>
 
   <!-- row 2 -->
-  <g>
-    <rect x="26" y="192" width="252" height="112" rx="10" fill="#111834" stroke="#7c6cf033"/>
+  <g font-family="Menlo, monospace">
+    <rect x="26" y="192" width="252" height="112" rx="10" class="panel"/>
     <text x="46" y="226" font-size="24">⚙️</text>
-    <text x="82" y="224" font-family="Menlo, monospace" font-size="14" font-weight="700" fill="#e2e8f0">task-executor</text>
-    <text x="82" y="242" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">one plan task, end-to-end:</text>
-    <text x="82" y="256" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">code, tests, commits, gate</text>
-    <rect x="46" y="274" width="212" height="3" rx="1.5" fill="url(#abar)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0.9s" repeatCount="indefinite"/></rect>
+    <text x="82" y="224" font-size="14" font-weight="700" class="name">task-executor</text>
+    <text x="82" y="242" font-size="11" class="desc">one plan task, end-to-end:</text>
+    <text x="82" y="256" font-size="11" class="desc">code, tests, commits, gate</text>
+    <rect x="46" y="274" width="212" height="3" rx="1.5" class="bar"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="0.9s" repeatCount="indefinite"/></rect>
   </g>
-  <g>
-    <rect x="294" y="192" width="252" height="112" rx="10" fill="#111834" stroke="#7c6cf033"/>
+  <g font-family="Menlo, monospace">
+    <rect x="294" y="192" width="252" height="112" rx="10" class="panel"/>
     <text x="314" y="226" font-size="24">🔍</text>
-    <text x="350" y="224" font-family="Menlo, monospace" font-size="14" font-weight="700" fill="#e2e8f0">code-reviewer</text>
-    <text x="350" y="242" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">every diff reviewed P0→P2</text>
-    <text x="350" y="256" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">before anything merges</text>
-    <rect x="314" y="274" width="212" height="3" rx="1.5" fill="url(#abar)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="1.2s" repeatCount="indefinite"/></rect>
+    <text x="350" y="224" font-size="14" font-weight="700" class="name">code-reviewer</text>
+    <text x="350" y="242" font-size="11" class="desc">every diff reviewed P0→P2</text>
+    <text x="350" y="256" font-size="11" class="desc">before anything merges</text>
+    <rect x="314" y="274" width="212" height="3" rx="1.5" class="bar"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="1.2s" repeatCount="indefinite"/></rect>
   </g>
-  <g>
-    <rect x="562" y="192" width="252" height="112" rx="10" fill="#111834" stroke="#7c6cf033"/>
+  <g font-family="Menlo, monospace">
+    <rect x="562" y="192" width="252" height="112" rx="10" class="panel"/>
     <text x="582" y="226" font-size="24">✅</text>
-    <text x="618" y="224" font-family="Menlo, monospace" font-size="14" font-weight="700" fill="#e2e8f0">verifier</text>
-    <text x="618" y="242" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">evidence before claims —</text>
-    <text x="618" y="256" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">gate criteria, proven green</text>
-    <rect x="582" y="274" width="212" height="3" rx="1.5" fill="url(#abar)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="1.5s" repeatCount="indefinite"/></rect>
+    <text x="618" y="224" font-size="14" font-weight="700" class="name">verifier</text>
+    <text x="618" y="242" font-size="11" class="desc">evidence before claims —</text>
+    <text x="618" y="256" font-size="11" class="desc">gate criteria, proven green</text>
+    <rect x="582" y="274" width="212" height="3" rx="1.5" class="bar"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="1.5s" repeatCount="indefinite"/></rect>
   </g>
 
   <!-- row 3 -->
-  <g>
-    <rect x="26" y="320" width="252" height="112" rx="10" fill="#111834" stroke="#7c6cf033"/>
+  <g font-family="Menlo, monospace">
+    <rect x="26" y="320" width="252" height="112" rx="10" class="panel"/>
     <text x="46" y="354" font-size="24">🛡️</text>
-    <text x="82" y="352" font-family="Menlo, monospace" font-size="14" font-weight="700" fill="#e2e8f0">security-audit</text>
-    <text x="82" y="370" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">injection, authz, secrets —</text>
-    <text x="82" y="384" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">pre-release security pass</text>
-    <rect x="46" y="402" width="212" height="3" rx="1.5" fill="url(#abar)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="1.8s" repeatCount="indefinite"/></rect>
+    <text x="82" y="352" font-size="14" font-weight="700" class="name">security-audit</text>
+    <text x="82" y="370" font-size="11" class="desc">injection, authz, secrets —</text>
+    <text x="82" y="384" font-size="11" class="desc">pre-release security pass</text>
+    <rect x="46" y="402" width="212" height="3" rx="1.5" class="bar"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="1.8s" repeatCount="indefinite"/></rect>
   </g>
-  <g>
-    <rect x="294" y="320" width="252" height="112" rx="10" fill="#111834" stroke="#7c6cf033"/>
+  <g font-family="Menlo, monospace">
+    <rect x="294" y="320" width="252" height="112" rx="10" class="panel"/>
     <text x="314" y="354" font-size="24">↩️</text>
-    <text x="350" y="352" font-family="Menlo, monospace" font-size="14" font-weight="700" fill="#e2e8f0">rollback-fixer</text>
-    <text x="350" y="370" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">when agents diverge —</text>
-    <text x="350" y="384" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">safe revert, preserved trail</text>
-    <rect x="314" y="402" width="212" height="3" rx="1.5" fill="url(#abar)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="2.1s" repeatCount="indefinite"/></rect>
+    <text x="350" y="352" font-size="14" font-weight="700" class="name">rollback-fixer</text>
+    <text x="350" y="370" font-size="11" class="desc">when agents diverge —</text>
+    <text x="350" y="384" font-size="11" class="desc">safe revert, preserved trail</text>
+    <rect x="314" y="402" width="212" height="3" rx="1.5" class="bar"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="2.1s" repeatCount="indefinite"/></rect>
   </g>
-  <g>
-    <rect x="562" y="320" width="252" height="112" rx="10" fill="#111834" stroke="#7c6cf033"/>
+  <g font-family="Menlo, monospace">
+    <rect x="562" y="320" width="252" height="112" rx="10" class="panel"/>
     <text x="582" y="354" font-size="24">🎨</text>
-    <text x="618" y="352" font-family="Menlo, monospace" font-size="14" font-weight="700" fill="#e2e8f0">designer</text>
-    <text x="618" y="370" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">high-fidelity prototypes —</text>
-    <text x="618" y="384" font-family="Menlo, monospace" font-size="11" fill="#94a3b8">3 directions before you pick</text>
-    <rect x="582" y="402" width="212" height="3" rx="1.5" fill="url(#abar)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="2.4s" repeatCount="indefinite"/></rect>
+    <text x="618" y="352" font-size="14" font-weight="700" class="name">designer</text>
+    <text x="618" y="370" font-size="11" class="desc">high-fidelity prototypes —</text>
+    <text x="618" y="384" font-size="11" class="desc">3 directions before you pick</text>
+    <rect x="582" y="402" width="212" height="3" rx="1.5" class="bar"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" begin="2.4s" repeatCount="indefinite"/></rect>
   </g>
 </svg>

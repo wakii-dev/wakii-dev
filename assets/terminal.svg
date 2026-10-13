@@ -1,8 +1,30 @@
 <svg width="620" height="264" viewBox="0 0 620 264" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="wakii up — terminal">
+  <style>
+    :root {
+      --bg1: #0d1224; --bg2: #0a0e1d; --bar: #111834; --stroke: #7c6cf055;
+      --prompt: #94a3b8; --cmd: #e2e8f0; --vio: #c4b5fd; --dim: #475569;
+      --cyan: #67e8f9; --ok: #34d399; --accent: #f0abfc;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg1: #ffffff; --bg2: #f6f4fb; --bar: #f0edf9; --stroke: #a78bfa66;
+        --prompt: #64748b; --cmd: #0f172a; --vio: #6D28D9; --dim: #94a3b8;
+        --cyan: #0e7490; --ok: #059669; --accent: #C026D3;
+      }
+    }
+    .tbg1 { stop-color: var(--bg1); } .tbg2 { stop-color: var(--bg2); }
+    .frame { stroke: var(--stroke); }
+    .bar { fill: var(--bar); }
+    .bar-title { fill: var(--dim); }
+    .prompt { fill: var(--prompt); } .cmd { fill: var(--cmd); }
+    .vio { fill: var(--vio); } .dim { fill: var(--dim); }
+    .cyan { fill: var(--cyan); } .ok { fill: var(--ok); }
+    .cursor { fill: var(--accent); }
+  </style>
   <defs>
     <linearGradient id="tbg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#0d1224"/>
-      <stop offset="1" stop-color="#0a0e1d"/>
+      <stop offset="0" class="tbg1"/>
+      <stop offset="1" class="tbg2"/>
     </linearGradient>
     <filter id="tglow" x="-30%" y="-30%" width="160%" height="160%">
       <feGaussianBlur stdDeviation="3" result="b"/>
@@ -11,35 +33,35 @@
     <clipPath id="clip"><rect x="1" y="1" width="618" height="262" rx="12"/></clipPath>
   </defs>
 
-  <rect x="1" y="1" width="618" height="262" rx="12" fill="url(#tbg)" stroke="#7c6cf055" stroke-width="1.5"/>
+  <rect x="1" y="1" width="618" height="262" rx="12" fill="url(#tbg)" class="frame" stroke-width="1.5"/>
   <g clip-path="url(#clip)">
-    <rect x="0" y="0" width="620" height="36" fill="#111834"/>
+    <rect x="0" y="0" width="620" height="36" class="bar"/>
     <circle cx="22" cy="18" r="6" fill="#f87171"/><circle cx="42" cy="18" r="6" fill="#fbbf24"/><circle cx="62" cy="18" r="6" fill="#34d399"/>
-    <text x="310" y="23" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#64748b">wakii — zsh</text>
+    <text x="310" y="23" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="12" class="bar-title">wakii — zsh</text>
 
     <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14.5" filter="url(#tglow)">
       <g>
-        <text x="24" y="70" fill="#94a3b8">$ <tspan fill="#e2e8f0" font-weight="600">wakii up</tspan></text>
+        <text x="24" y="70" class="prompt">$ <tspan class="cmd" font-weight="600">wakii up</tspan></text>
         <animate attributeName="opacity" values="0;1" dur="0.4s" fill="freeze"/>
       </g>
       <g opacity="0">
-        <text x="24" y="106" fill="#c4b5fd">▸ planning<tspan fill="#475569"> (spec → plan → dag)</tspan> <tspan fill="#34d399">✔</tspan></text>
+        <text x="24" y="106" class="vio">▸ planning<tspan class="dim"> (spec → plan → dag)</tspan> <tspan class="ok">✔</tspan></text>
         <animate attributeName="opacity" values="0;1" dur="0.3s" begin="0.9s" fill="freeze"/>
       </g>
       <g opacity="0">
-        <text x="24" y="142" fill="#c4b5fd">▸ agents: <tspan fill="#e2e8f0">builder · tester · reviewer · shipper</tspan></text>
+        <text x="24" y="142" class="vio">▸ agents: <tspan class="cmd">builder · tester · reviewer · shipper</tspan></text>
         <animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.8s" fill="freeze"/>
       </g>
       <g opacity="0">
-        <text x="24" y="178" fill="#67e8f9">▸ building wakii… <tspan fill="#475569">2.5M orders later</tspan></text>
+        <text x="24" y="178" class="cyan">▸ building wakii… <tspan class="dim">2.5M orders later</tspan></text>
         <animate attributeName="opacity" values="0;1" dur="0.3s" begin="2.7s" fill="freeze"/>
       </g>
       <g opacity="0">
-        <text x="24" y="214" fill="#34d399" font-weight="600">✔ shipped <tspan fill="#475569">— human approved · agents did the typing</tspan></text>
+        <text x="24" y="214" class="ok" font-weight="600">✔ shipped <tspan class="dim">— human approved · agents did the typing</tspan></text>
         <animate attributeName="opacity" values="0;1" dur="0.3s" begin="3.8s" fill="freeze"/>
       </g>
       <g opacity="0">
-        <rect x="26" y="228" width="9" height="16" fill="#f0abfc">
+        <rect x="26" y="228" width="9" height="16" class="cursor">
           <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
         </rect>
         <animate attributeName="opacity" values="0;1" dur="0.2s" begin="4.6s" fill="freeze"/>
