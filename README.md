@@ -21,8 +21,9 @@
   <img src="assets/agents.svg" width="100%" alt="Wakii agent crew: spec-critic, impact-analyst, plan-critic, task-executor, code-reviewer, verifier, security-audit, rollback-fixer, designer" />
 </div>
 
-*9 agents ship with every Wakii install. The site, the IDE docs and the
-2.5M-order platform below were all reviewed by this crew.*
+*9 agents ship with every Wakii install. The site, the IDE docs, this profile
+and the 2.5M-order platform below were all spec'd, built and reviewed by this
+crew — the profile is the demo.*
 
 ## ⚙️ The pipeline
 
@@ -39,15 +40,39 @@
 - Core: [`wakii`](https://github.com/wakii-dev/wakii) (TypeScript) · site: [wakii.dev](https://wakii.dev) → [`wakii-site`](https://github.com/wakii-dev/wakii-site) (Astro)
 - Docs, skills catalog (20 built-in skills), public roadmap & downloads
 
-### 🏗️ [hub-store](https://github.com/wakii-dev/hub-store) — fulfillment operations platform *(private)*
+### 🏗️ hub-store — fulfillment operations platform *(private — architecture below)*
 > Production-grade logistics platform exercised at **2.5M+ orders / year scale**:
 > order coordination, warehouse picking batches, D2C carrier hand-off,
 > technician dispatch, COD settlement, label printing.
 
-- Polyglot microservices: **Java 17 / Spring Boot · Go · Python** over gRPC
-- **React 18 microfrontends** (Module Federation) behind a Fastify BFF
-- PostgreSQL (dual-DB), Kafka side-channel, Keycloak OIDC, pnpm + Turborepo
-- Full QA story: role-matrix regression suites, Playwright e2e, CI on Actions
+```mermaid
+graph LR
+    MFE["React 18 microfrontends<br/>Module Federation"] --> BFF["Fastify BFF"]
+    BFF -->|gRPC| ORD["order-svc<br/>Java 17 · Spring Boot"]
+    BFF -->|gRPC| WHS["warehouse-svc<br/>Go"]
+    BFF -->|gRPC| CAR["carrier-svc<br/>Python"]
+    ORD --> PG1[("PostgreSQL")]
+    WHS --> PG2[("PostgreSQL")]
+    ORD -.->|events| K["Kafka"]
+    WHS -.->|events| K
+    SSO["Keycloak OIDC"] --> BFF
+```
+
+- Polyglot microservices over **gRPC** · PostgreSQL dual-DB · Kafka side-channel
+- **Full QA story**: role-matrix regression suites, Playwright e2e, CI on Actions
+
+### 🎯 wakii-english — AI IELTS prep for Vietnamese learners *(private — architecture below)*
+> AI scores Writing/Speaking to **≤ 0.5 band accuracy**, builds a personalized
+> roadmap, runs a multi-tenant LMS.
+
+```mermaid
+graph LR
+    APP["Next.js + Vite<br/>learning apps"] --> API["Spring Boot 3<br/>microservices"]
+    API --> PG[("PostgreSQL<br/>RLS multi-tenant")]
+    API <--> K["Kafka"]
+    AI["AI grading<br/>Writing / Speaking"] --- API
+    OPS["Keycloak · observability<br/>wakii-infra"] --- API
+```
 
 ### 🧪 More builds
 - 🎧 [`iloveenglishclub`](https://github.com/wakii-dev/iloveenglishclub) — English listening
@@ -56,14 +81,9 @@
 - 🛒 [`ecommerce`](https://github.com/wakii-dev/ecommerce) — Spring Boot 3 microservices +
   React/Vite microfrontends (Module Federation), Tiki-inspired storefront
   · PostgreSQL · Redis · RabbitMQ · MongoDB · Elasticsearch · Stripe
-- 🎯 `wakii-english` *(private)* — AI IELTS prep for Vietnamese learners: AI Writing/Speaking
-  scoring (≤ 0.5 band), personalized roadmap, multi-tenant LMS
-  · Spring Boot 3 + Next.js/Vite + Kafka + Postgres RLS
 - 🔌 `cc-driver` *(private)* — TypeScript driver to orchestrate Claude Code headless
   (agents, pools, goal/loop, background jobs) + schema-validated LLM calls
   · GLM (z.ai) / Claude multi-provider, zero runtime deps
-- 🚚 `wakii-infra` *(private)* — deploy infrastructure: compose, runtime Dockerfiles,
-  Keycloak, Postgres init, observability
 
 ## 🧰 Stack I work with
 
