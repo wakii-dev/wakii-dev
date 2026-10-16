@@ -108,13 +108,13 @@ graph LR
 ## 📊 Mission control
 
 <div align="center">
-  <img src="assets/mission-control.svg?v=1792053021" width="100%" alt="mission control stats" />
+  <img src="assets/mission-control.svg?v=1792138936" width="100%" alt="mission control stats" />
 </div>
 
 ## 🧊 Contributions in 3D
 
 <div align="center">
-  <img src="profile-3d-contrib/profile-green-animate.svg?v=1792053021" width="100%" alt="3D contribution graph" />
+  <img src="profile-3d-contrib/profile-green-animate.svg?v=1792138936" width="100%" alt="3D contribution graph" />
 </div>
 
 ## 🐍 Snake
