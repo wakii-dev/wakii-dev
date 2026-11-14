@@ -114,7 +114,7 @@ graph LR
 ## 🧊 Contributions in 3D
 
 <div align="center">
-  <img src="profile-3d-contrib/profile-green-animate.svg?v=1794568603" width="100%" alt="3D contribution graph" />
+  <img src="profile-3d-contrib/profile-green-animate.svg?v=1794652917" width="100%" alt="3D contribution graph" />
 </div>
 
 ## 🐍 Snake
